@@ -8,6 +8,7 @@ import { Privacy } from "./components/Privacy";
 import { Terms } from "./components/Terms";
 import { Support } from "./components/Support";
 import ResetPassword from "./components/ResetPassword";
+import ForgotPassword from "./components/ForgotPassword";
 import { AnimatedSection } from "./components/AnimatedSection";
 import { DebugDevicePreview } from "./components/DebugDevicePreview";
 
@@ -510,6 +511,7 @@ export default function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/support" element={<Support />} />
+        <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/reset" element={<ResetPassword />} />
       </Routes>
     </AnimatePresence>
