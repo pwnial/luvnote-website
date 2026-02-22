@@ -56,106 +56,102 @@ export default function ResetPassword() {
     if (updateError) {
       setError(updateError.message);
     } else {
-      setMessage('Password updated successfully! You can now sign in with your new password in the app.');
+      setMessage('Password updated! You can now sign in with your new password in the Luv app.');
     }
   };
 
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(180deg, #fdf2f8 0%, #ffffff 50%, #ffffff 100%)',
+      background: '#282828',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       padding: '20px',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+      fontFamily: 'ui-monospace, "SF Mono", "Cascadia Code", monospace',
     }}>
-      <div style={{ width: '100%', maxWidth: '420px' }}>
+      <div style={{ width: '100%', maxWidth: '400px' }}>
         {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '64px',
-            height: '64px',
-            background: 'linear-gradient(135deg, #ec4899, #f43f5e)',
-            borderRadius: '16px',
-            boxShadow: '0 8px 24px rgba(236, 72, 153, 0.25)',
-            marginBottom: '16px',
-            fontSize: '32px',
-          }}>
-            💌
-          </div>
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <img
+            src="/heart-love-gruvbox.gif"
+            alt="Luv"
+            style={{
+              width: '80px',
+              height: '80px',
+              imageRendering: 'pixelated' as any,
+              marginBottom: '20px',
+            }}
+          />
           <h1 style={{
-            fontSize: '24px',
-            fontWeight: 700,
-            color: '#111827',
-            margin: '0 0 4px 0',
+            fontSize: '28px',
+            fontWeight: 400,
+            color: '#ebdbb2',
+            margin: '0 0 8px 0',
+            letterSpacing: '-0.02em',
           }}>Reset Password</h1>
           <p style={{
-            color: '#9ca3af',
+            color: '#928374',
             fontSize: '14px',
             margin: 0,
-          }}>Enter your new password for Luv Note</p>
+          }}>Choose a new password for Luv Note</p>
         </div>
 
         {/* Card */}
         <div style={{
-          background: '#ffffff',
-          borderRadius: '24px',
-          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04)',
-          border: '1px solid #f3f4f6',
+          background: '#3c3836',
+          borderRadius: '16px',
+          border: '1px solid #504945',
           padding: '32px',
         }}>
           {message ? (
             <div style={{
-              background: '#f0fdf4',
-              border: '1px solid #bbf7d0',
-              borderRadius: '16px',
+              background: '#282828',
+              border: '1px solid #b8bb26',
+              borderRadius: '12px',
               padding: '24px',
               textAlign: 'center',
             }}>
-              <div style={{ fontSize: '32px', marginBottom: '8px' }}>✅</div>
-              <p style={{ color: '#166534', fontWeight: 500, fontSize: '15px', margin: 0 }}>{message}</p>
+              <div style={{ fontSize: '28px', marginBottom: '12px' }}>💌</div>
+              <p style={{ color: '#b8bb26', fontWeight: 500, fontSize: '15px', margin: 0, lineHeight: 1.6 }}>{message}</p>
             </div>
           ) : !ready ? (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '32px 0' }}>
               <div style={{
-                width: '32px',
-                height: '32px',
-                border: '2px solid #ec4899',
+                width: '28px',
+                height: '28px',
+                border: '2px solid #ebdbb2',
                 borderTopColor: 'transparent',
                 borderRadius: '50%',
                 animation: 'spin 0.8s linear infinite',
                 marginBottom: '16px',
               }} />
-              <p style={{ color: '#9ca3af', fontSize: '14px', margin: 0 }}>Verifying reset link...</p>
+              <p style={{ color: '#928374', fontSize: '14px', margin: 0 }}>Verifying reset link...</p>
               <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
             </div>
           ) : (
             <form onSubmit={handleReset}>
               {error && (
                 <div style={{
-                  background: '#fef2f2',
-                  border: '1px solid #fecaca',
-                  borderRadius: '12px',
+                  background: '#282828',
+                  border: '1px solid #fb4934',
+                  borderRadius: '10px',
                   padding: '12px 16px',
-                  marginBottom: '16px',
-                  color: '#dc2626',
-                  fontSize: '14px',
+                  marginBottom: '20px',
+                  color: '#fb4934',
+                  fontSize: '13px',
                 }}>
                   {error}
                 </div>
               )}
 
-              <div style={{ marginBottom: '16px' }}>
+              <div style={{ marginBottom: '20px' }}>
                 <label style={{
                   display: 'block',
                   fontSize: '13px',
-                  fontWeight: 600,
-                  color: '#374151',
-                  marginBottom: '6px',
+                  fontWeight: 500,
+                  color: '#a89984',
+                  marginBottom: '8px',
                 }}>New Password</label>
                 <input
                   type="password"
@@ -164,32 +160,35 @@ export default function ResetPassword() {
                   placeholder="At least 6 characters"
                   style={{
                     width: '100%',
-                    padding: '12px 16px',
-                    borderRadius: '12px',
-                    border: '1px solid #e5e7eb',
+                    padding: '14px 16px',
+                    borderRadius: '10px',
+                    border: '1px solid #504945',
+                    background: '#282828',
+                    color: '#ebdbb2',
                     fontSize: '16px',
                     outline: 'none',
                     boxSizing: 'border-box',
                     transition: 'border-color 0.2s, box-shadow 0.2s',
+                    fontFamily: 'inherit',
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = '#ec4899';
-                    e.target.style.boxShadow = '0 0 0 3px rgba(236, 72, 153, 0.1)';
+                    e.target.style.borderColor = '#ebdbb2';
+                    e.target.style.boxShadow = '0 0 0 2px rgba(235, 219, 178, 0.1)';
                   }}
                   onBlur={(e) => {
-                    e.target.style.borderColor = '#e5e7eb';
+                    e.target.style.borderColor = '#504945';
                     e.target.style.boxShadow = 'none';
                   }}
                 />
               </div>
 
-              <div style={{ marginBottom: '24px' }}>
+              <div style={{ marginBottom: '28px' }}>
                 <label style={{
                   display: 'block',
                   fontSize: '13px',
-                  fontWeight: 600,
-                  color: '#374151',
-                  marginBottom: '6px',
+                  fontWeight: 500,
+                  color: '#a89984',
+                  marginBottom: '8px',
                 }}>Confirm Password</label>
                 <input
                   type="password"
@@ -198,20 +197,23 @@ export default function ResetPassword() {
                   placeholder="Type it again"
                   style={{
                     width: '100%',
-                    padding: '12px 16px',
-                    borderRadius: '12px',
-                    border: '1px solid #e5e7eb',
+                    padding: '14px 16px',
+                    borderRadius: '10px',
+                    border: '1px solid #504945',
+                    background: '#282828',
+                    color: '#ebdbb2',
                     fontSize: '16px',
                     outline: 'none',
                     boxSizing: 'border-box',
                     transition: 'border-color 0.2s, box-shadow 0.2s',
+                    fontFamily: 'inherit',
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = '#ec4899';
-                    e.target.style.boxShadow = '0 0 0 3px rgba(236, 72, 153, 0.1)';
+                    e.target.style.borderColor = '#ebdbb2';
+                    e.target.style.boxShadow = '0 0 0 2px rgba(235, 219, 178, 0.1)';
                   }}
                   onBlur={(e) => {
-                    e.target.style.borderColor = '#e5e7eb';
+                    e.target.style.borderColor = '#504945';
                     e.target.style.boxShadow = 'none';
                   }}
                 />
@@ -223,15 +225,15 @@ export default function ResetPassword() {
                 style={{
                   width: '100%',
                   padding: '14px',
-                  background: loading ? '#d1d5db' : 'linear-gradient(135deg, #ec4899, #f43f5e)',
-                  color: 'white',
+                  background: loading ? '#504945' : '#b8bb26',
+                  color: loading ? '#928374' : '#282828',
                   border: 'none',
-                  borderRadius: '12px',
-                  fontSize: '16px',
+                  borderRadius: '10px',
+                  fontSize: '15px',
                   fontWeight: 600,
                   cursor: loading ? 'not-allowed' : 'pointer',
-                  boxShadow: loading ? 'none' : '0 8px 24px rgba(236, 72, 153, 0.25)',
                   transition: 'all 0.2s',
+                  fontFamily: 'inherit',
                 }}
               >
                 {loading ? 'Updating...' : 'Update Password'}
@@ -242,7 +244,10 @@ export default function ResetPassword() {
 
         {/* Footer */}
         <p style={{ textAlign: 'center', marginTop: '24px', fontSize: '13px' }}>
-          <a href="/" style={{ color: '#ec4899', textDecoration: 'none' }}>← Back to Luv Note</a>
+          <a href="/" style={{ color: '#928374', textDecoration: 'none', transition: 'color 0.2s' }}
+             onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#ebdbb2'}
+             onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#928374'}
+          >← Back to Luv Note</a>
         </p>
       </div>
     </div>
