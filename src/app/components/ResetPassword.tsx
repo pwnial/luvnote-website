@@ -81,6 +81,9 @@ export default function ResetPassword() {
               height: '80px',
               imageRendering: 'pixelated' as any,
               marginBottom: '20px',
+              display: 'block',
+              marginLeft: 'auto',
+              marginRight: 'auto',
             }}
           />
           <h1 style={{
