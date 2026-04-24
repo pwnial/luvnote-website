@@ -10,7 +10,6 @@ import { Support } from "./components/Support";
 import ResetPassword from "./components/ResetPassword";
 import ForgotPassword from "./components/ForgotPassword";
 import { AnimatedSection } from "./components/AnimatedSection";
-import { DebugDevicePreview } from "./components/DebugDevicePreview";
 
 const INTRO_SESSION_KEY = "luv-intro-played";
 
@@ -88,8 +87,6 @@ function Home() {
       {/* Background */}
       <div className="fixed inset-0 z-0 bg-[#282828]" />
 
-      {/* Debug device preview — remove before launch */}
-      <DebugDevicePreview />
 
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50">
