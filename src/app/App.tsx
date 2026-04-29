@@ -232,8 +232,10 @@ function Home() {
                 transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
                 className="flex gap-3"
               >
-                <motion.a 
-                  href="#download"
+                <motion.a
+                  href="https://apps.apple.com/app/id6763015481"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 400, damping: 15 }}
@@ -445,15 +447,20 @@ function Home() {
             <p className="text-base text-[#a89984] mb-12 max-w-md mx-auto">
               Free to download. No ads. No tracking. Just you two.
             </p>
-            <motion.a 
-              href="#"
-              whileHover={{ scale: 1.03 }}
+            <motion.a
+              href="https://apps.apple.com/app/id6763015481"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-[#b8bb26] text-[#282828] hover:bg-[#98971a] hover:shadow-lg hover:shadow-[#b8bb26]/30 transition-all duration-300 font-medium text-base rounded-xl"
+              className="inline-block"
             >
-              <Download className="w-5 h-5" />
-              Download for iOS
+              <img
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="Download on the App Store"
+                className="h-14"
+              />
             </motion.a>
             <div className="flex items-center justify-center gap-6 mt-12 text-xs text-[#928374]">
               <div>iOS 16+</div>
