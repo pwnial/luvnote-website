@@ -13,7 +13,7 @@ export function Support() {
     { question: "Can I use Luv with multiple partners?", answer: "No, Luv is designed exclusively for couples. Each account can only be connected to one partner at a time to maintain the intimate, personal nature of the app." },
     { question: "Is my data secure and private?", answer: "Yes! All messages are end-to-end encrypted. We can't read your messages, and they're only shared between you and your connected partner. See our Privacy Policy for full details." },
     { question: "How do I cancel my subscription?", answer: "Subscriptions are managed through the App Store. Go to Settings → [Your Name] → Subscriptions → Luv, then tap Cancel Subscription." },
-    { question: "What iOS version do I need?", answer: "Luv requires iOS 16 or later to support home screen widgets and the latest notification features." },
+    { question: "What iOS version do I need?", answer: "Luv requires iOS 18.5 or later to support home screen widgets and the latest notification features." },
     { question: "Can I customize the widget appearance?", answer: "Yes! Premium subscribers can customize widget colors, fonts, and styles. Free users get the default Gruvbox theme." },
     { question: "What happens to my messages if I delete the app?", answer: "If you delete the app without first deleting your account, your messages remain stored. You can reinstall and log back in to access them. To permanently delete everything, use the Delete Account option in Settings first." },
   ];

@@ -7,6 +7,7 @@ import { HeroPhones } from "./components/HeroPhones";
 import { Privacy } from "./components/Privacy";
 import { Terms } from "./components/Terms";
 import { Support } from "./components/Support";
+import { Connect } from "./components/Connect";
 import ResetPassword from "./components/ResetPassword";
 import ForgotPassword from "./components/ForgotPassword";
 import { AnimatedSection } from "./components/AnimatedSection";
@@ -60,7 +61,7 @@ function Home() {
     },
     {
       question: "Does it work with Android?",
-      answer: "Currently Luv is iOS-only (iOS 16+). We're focused on making the best possible iOS experience first, but Android support is on our roadmap."
+      answer: "Currently Luv is iOS-only (iOS 18.5+). We're focused on making the best possible iOS experience first, but Android support is on our roadmap."
     },
     {
       question: "How much does it cost?",
@@ -463,7 +464,7 @@ function Home() {
               />
             </motion.a>
             <div className="flex items-center justify-center gap-6 mt-12 text-xs text-[#928374]">
-              <div>iOS 16+</div>
+              <div>iOS 18.5+</div>
               <div>•</div>
               <div>Free</div>
               <div>•</div>
@@ -481,7 +482,7 @@ function Home() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-sm">
             <div className="flex items-center gap-2 text-[#928374]">
               <div className="w-2 h-2 bg-[#ebdbb2] rounded-full" />
-              <span>luv.app</span>
+              <span>luvnote.app</span>
             </div>
             <div className="flex gap-8 text-[#928374]">
               <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
@@ -515,6 +516,7 @@ export default function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/support" element={<Support />} />
+        <Route path="/connect" element={<Connect />} />
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/reset" element={<ResetPassword />} />
       </Routes>
