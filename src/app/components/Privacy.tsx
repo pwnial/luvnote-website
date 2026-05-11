@@ -46,7 +46,7 @@ export function Privacy() {
       title: "Data Sharing",
       content: (
         <p className="text-[#a89984] leading-relaxed">
-          We don't sell your data. We share information only with your <span className="text-[#ebdbb2]">connected partner</span>, <span className="text-[#ebdbb2]">service providers</span> (Supabase, Apple), when <span className="text-[#ebdbb2]">legally required</span>, or during business transfers.
+          We don't sell your data. We share information only with your <span className="text-[#ebdbb2]">connected partner</span>, <span className="text-[#ebdbb2]">service providers</span> (Supabase, Apple, TikTok for ad attribution — see section 06), when <span className="text-[#ebdbb2]">legally required</span>, or during business transfers.
         </p>
       ),
     },
@@ -65,9 +65,12 @@ export function Privacy() {
       content: (
         <>
           <p className="text-[#a89984] mb-3 leading-relaxed">We use <span className="text-[#ebdbb2]">Supabase</span> for authentication, storage, and backend services, and <span className="text-[#ebdbb2]">Apple</span> for push notifications and in-app purchases.</p>
-          <div className="flex gap-6 text-xs text-[#928374]">
+          <p className="text-[#a89984] mb-3 leading-relaxed">We also use the <span className="text-[#ebdbb2]">TikTok Business SDK</span> to measure how new users discover luv through our advertising. If you grant the iOS App Tracking Transparency prompt, we share your Advertising Identifier (IDFA), basic device info, and install/launch events with TikTok for attribution. We do <span className="text-[#ebdbb2]">not</span> share your messages, partner connections, name, or email with TikTok.</p>
+          <p className="text-[#a89984] mb-3 leading-relaxed">You can opt out at any time in <span className="text-[#ebdbb2]">iOS Settings → Privacy &amp; Security → Tracking → luv</span>. The app functions normally if you opt out — we just won't see attribution data.</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-[#928374]">
             <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#b8bb26] hover:underline">supabase.com/privacy</a>
             <a href="https://www.apple.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#b8bb26] hover:underline">apple.com/privacy</a>
+            <a href="https://www.tiktok.com/legal/page/global/privacy-policy/en" target="_blank" rel="noopener noreferrer" className="text-[#b8bb26] hover:underline">tiktok.com/privacy</a>
           </div>
         </>
       ),
