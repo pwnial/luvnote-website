@@ -144,7 +144,7 @@ export function Privacy() {
               className="text-center"
             >
               <p className="text-xs text-[#928374] uppercase tracking-[0.2em] mb-6">Last updated January 2025</p>
-              <h1 className="text-5xl md:text-7xl mb-6 text-[#ebdbb2]">Privacy Policy</h1>
+              <h1 className="text-5xl md:text-7xl font-semibold mb-6 text-[#ebdbb2]">Privacy Policy</h1>
               <p className="text-lg text-[#a89984] max-w-lg mx-auto leading-relaxed">
                 Your data, your control. Here's exactly what we do — and don't do.
               </p>

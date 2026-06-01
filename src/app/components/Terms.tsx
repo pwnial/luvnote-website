@@ -181,7 +181,7 @@ export function Terms() {
               className="text-center"
             >
               <p className="text-xs text-[#928374] uppercase tracking-[0.2em] mb-6">Last updated January 2025</p>
-              <h1 className="text-5xl md:text-7xl mb-6 text-[#ebdbb2]">Terms of Service</h1>
+              <h1 className="text-5xl md:text-7xl font-semibold mb-6 text-[#ebdbb2]">Terms of Service</h1>
               <p className="text-lg text-[#a89984] max-w-lg mx-auto leading-relaxed">
                 The rules of the road. Fair, simple, and transparent.
               </p>

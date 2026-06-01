@@ -17,9 +17,16 @@ const INTRO_SESSION_KEY = "luv-intro-played";
 function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  // Intro animation state
-  const alreadyPlayed = false;
-  const [introPhase, setIntroPhase] = useState<"splash" | "moving" | "done">("splash");
+  // Intro animation state. Skip the splash on repeat visits within the same
+  // session — handleMoveComplete already writes INTRO_SESSION_KEY, we just
+  // needed to actually read it on mount.
+  const [alreadyPlayed] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return sessionStorage.getItem(INTRO_SESSION_KEY) === "1";
+  });
+  const [introPhase, setIntroPhase] = useState<"splash" | "moving" | "done">(
+    alreadyPlayed ? "done" : "splash"
+  );
   const navHeartRef = useRef<HTMLDivElement>(null);
   const [navHeartRect, setNavHeartRect] = useState<{ x: number; y: number } | null>(null);
 
@@ -204,7 +211,7 @@ function Home() {
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
               >
-                <h1 className="text-5xl md:text-6xl lg:text-7xl leading-tight text-[#ebdbb2]">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight text-[#ebdbb2]">
                   A love note
                 </h1>
               </motion.div>
@@ -213,7 +220,7 @@ function Home() {
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
               >
-                <h1 className="text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight text-[#d5c4a1]">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold mb-6 leading-tight text-[#d5c4a1]">
                   on their lock screen
                 </h1>
               </motion.div>
@@ -245,10 +252,10 @@ function Home() {
                   <Download className="w-4 h-4" />
                   Get Started
                 </motion.a>
-                <motion.a 
+                <motion.a
                   href="#features"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.03, borderColor: "rgba(235, 219, 178, 0.35)" }}
+                  whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 400, damping: 15 }}
                   className="px-5 py-2.5 border border-[#504945] text-sm hover:bg-[#3c3836] transition-colors text-[#ebdbb2] rounded-xl"
                 >
@@ -266,22 +273,26 @@ function Home() {
       </section>
 
       {/* Accent line */}
-      <div className="max-w-[600px] mx-auto h-px bg-gradient-to-r from-transparent via-[#ebdbb2]/10 to-transparent" />
+      <div className="max-w-[600px] mx-auto h-px bg-gradient-to-r from-transparent via-[#ebdbb2]/15 to-transparent" />
 
       {/* Features */}
       <section id="features" className="py-32 px-6">
         <div className="max-w-[1200px] mx-auto">
           <AnimatedSection className="mb-20" animation="blur-in">
-            <h2 className="text-4xl md:text-5xl text-[#ebdbb2]">
+            <h2 className="text-4xl md:text-5xl font-semibold text-[#ebdbb2]">
               Why couples love it
             </h2>
           </AnimatedSection>
 
           <AnimatedSection delay={0.1} className="mb-24" animation="fade-left">
             <div className="flex items-start gap-6 max-w-[700px]">
-              <div className="w-12 h-12 rounded-2xl bg-[#ebdbb2]/8 border border-[#ebdbb2]/10 flex items-center justify-center flex-shrink-0 mt-1">
+              <motion.div
+                whileHover={{ scale: 1.08, rotate: 3 }}
+                transition={{ type: "spring", stiffness: 350, damping: 18 }}
+                className="w-12 h-12 rounded-2xl bg-[#ebdbb2]/8 border border-[#ebdbb2]/10 flex items-center justify-center flex-shrink-0 mt-1"
+              >
                 <Zap className="w-5 h-5 text-[#ebdbb2]" />
-              </div>
+              </motion.div>
               <div>
                 <h3 className="text-2xl md:text-3xl text-[#ebdbb2] mb-3">Instant updates</h3>
                 <p className="text-[#a89984] leading-relaxed">
@@ -293,9 +304,13 @@ function Home() {
 
           <AnimatedSection delay={0.15} className="mb-24" animation="fade-right">
             <div className="flex items-start gap-6 max-w-[700px] ml-auto">
-              <div className="w-12 h-12 rounded-2xl bg-[#ebdbb2]/8 border border-[#ebdbb2]/10 flex items-center justify-center flex-shrink-0 mt-1">
+              <motion.div
+                whileHover={{ scale: 1.08, rotate: -3 }}
+                transition={{ type: "spring", stiffness: 350, damping: 18 }}
+                className="w-12 h-12 rounded-2xl bg-[#ebdbb2]/8 border border-[#ebdbb2]/10 flex items-center justify-center flex-shrink-0 mt-1"
+              >
                 <Lock className="w-5 h-5 text-[#ebdbb2]" />
-              </div>
+              </motion.div>
               <div>
                 <h3 className="text-2xl md:text-3xl text-[#ebdbb2] mb-3">Completely private</h3>
                 <p className="text-[#a89984] leading-relaxed">
@@ -307,9 +322,13 @@ function Home() {
 
           <AnimatedSection delay={0.2} animation="fade-left">
             <div className="flex items-start gap-6 max-w-[700px]">
-              <div className="w-12 h-12 rounded-2xl bg-[#ebdbb2]/8 border border-[#ebdbb2]/10 flex items-center justify-center flex-shrink-0 mt-1">
+              <motion.div
+                whileHover={{ scale: 1.12, rotate: 8 }}
+                transition={{ type: "spring", stiffness: 350, damping: 18 }}
+                className="w-12 h-12 rounded-2xl bg-[#ebdbb2]/8 border border-[#ebdbb2]/10 flex items-center justify-center flex-shrink-0 mt-1"
+              >
                 <Heart className="w-5 h-5 text-[#ebdbb2] fill-[#ebdbb2]" />
-              </div>
+              </motion.div>
               <div>
                 <h3 className="text-2xl md:text-3xl text-[#ebdbb2] mb-3">Built for two</h3>
                 <p className="text-[#a89984] leading-relaxed">
@@ -322,7 +341,7 @@ function Home() {
       </section>
 
       {/* Accent line */}
-      <div className="max-w-[600px] mx-auto h-px bg-gradient-to-r from-transparent via-[#ebdbb2]/10 to-transparent" />
+      <div className="max-w-[600px] mx-auto h-px bg-gradient-to-r from-transparent via-[#ebdbb2]/15 to-transparent" />
 
       {/* How It Works */}
       <section className="py-32 px-6">
@@ -333,7 +352,7 @@ function Home() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.1} animation="fade-right">
-              <h3 className="text-3xl md:text-4xl mb-12 text-[#ebdbb2]">
+              <h3 className="text-3xl md:text-4xl font-semibold mb-12 text-[#ebdbb2]">
                 Their home screen.
                 <br />
                 Your <span className="text-[#d5c4a1]">love notes</span>.
@@ -371,13 +390,13 @@ function Home() {
       </section>
 
       {/* Accent line */}
-      <div className="max-w-[600px] mx-auto h-px bg-gradient-to-r from-transparent via-[#ebdbb2]/10 to-transparent" />
+      <div className="max-w-[600px] mx-auto h-px bg-gradient-to-r from-transparent via-[#ebdbb2]/15 to-transparent" />
 
       {/* FAQ */}
       <section className="py-32 px-6">
         <div className="max-w-[800px] mx-auto">
           <AnimatedSection className="mb-16" animation="blur-in">
-            <h2 className="text-4xl md:text-5xl mb-4 text-[#ebdbb2]">
+            <h2 className="text-4xl md:text-5xl font-semibold mb-4 text-[#ebdbb2]">
               Common questions
             </h2>
           </AnimatedSection>
@@ -414,7 +433,7 @@ function Home() {
                           initial={{ filter: "blur(4px)", opacity: 0 }}
                           animate={{ filter: "blur(0px)", opacity: 1 }}
                           exit={{ filter: "blur(4px)", opacity: 0 }}
-                          transition={{ duration: 0.3, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                          transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
                           className="text-sm text-[#a89984] leading-relaxed px-2 pb-5"
                         >
                           {faq.answer}
@@ -430,7 +449,7 @@ function Home() {
       </section>
 
       {/* Accent line */}
-      <div className="max-w-[600px] mx-auto h-px bg-gradient-to-r from-transparent via-[#ebdbb2]/10 to-transparent" />
+      <div className="max-w-[600px] mx-auto h-px bg-gradient-to-r from-transparent via-[#ebdbb2]/15 to-transparent" />
 
       {/* CTA */}
       <section id="download" className="py-32 px-6 relative">
@@ -440,7 +459,7 @@ function Home() {
         </div>
         <AnimatedSection>
           <div className="max-w-[800px] mx-auto text-center relative">
-            <h2 className="text-5xl md:text-6xl mb-6 text-[#ebdbb2]">
+            <h2 className="text-5xl md:text-6xl font-semibold mb-6 text-[#ebdbb2]">
               Start sending
               <br />
               <span className="text-[#d5c4a1]">today</span>
@@ -485,15 +504,18 @@ function Home() {
               <span>luvnote.app</span>
             </div>
             <div className="flex gap-8 text-[#928374]">
-              <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
-                <Link to="/privacy" className="hover:text-[#ebdbb2] transition-colors">privacy</Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
-                <Link to="/terms" className="hover:text-[#ebdbb2] transition-colors">terms</Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
-                <Link to="/support" className="hover:text-[#ebdbb2] transition-colors">support</Link>
-              </motion.div>
+              <Link to="/privacy" className="relative hover:text-[#ebdbb2] transition-colors group">
+                privacy
+                <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-[#ebdbb2] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+              </Link>
+              <Link to="/terms" className="relative hover:text-[#ebdbb2] transition-colors group">
+                terms
+                <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-[#ebdbb2] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+              </Link>
+              <Link to="/support" className="relative hover:text-[#ebdbb2] transition-colors group">
+                support
+                <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-[#ebdbb2] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+              </Link>
             </div>
           </div>
           <div className="text-center mt-8 text-xs text-[#928374]">

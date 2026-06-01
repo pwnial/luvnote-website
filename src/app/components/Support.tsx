@@ -39,7 +39,7 @@ export function Support() {
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <h1 className="text-5xl md:text-7xl mb-6 text-[#ebdbb2]">Support</h1>
+              <h1 className="text-5xl md:text-7xl font-semibold mb-6 text-[#ebdbb2]">Support</h1>
               <p className="text-lg text-[#a89984] max-w-lg mx-auto leading-relaxed">
                 Need help? We've got you covered.
               </p>

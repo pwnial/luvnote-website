@@ -21,6 +21,14 @@ export function Connect() {
 
     setStage("trying-app");
 
+    // Auto-copy the invite link so the app can pick it up off the clipboard
+    // after an App Store install (the install strips the deep link, so the
+    // freshly-installed app reads the clipboard on first launch to auto-connect).
+    // Best-effort: ignore failures (clipboard may be unavailable pre-interaction).
+    navigator.clipboard
+      ?.writeText(`https://luvnote.app/connect?code=${code}`)
+      .catch(() => {});
+
     // Attempt to open the iOS app via custom URL scheme.
     // If the app is installed, iOS handles `luv://` and the page goes to background.
     // If not, the page stays foreground and the timer below redirects to the App Store.
@@ -76,7 +84,7 @@ export function Connect() {
             style={{ imageRendering: "pixelated" }}
           />
 
-          <h1 className="text-3xl md:text-4xl text-[#ebdbb2] mb-3 leading-tight">
+          <h1 className="text-3xl md:text-4xl font-semibold text-[#ebdbb2] mb-3 leading-tight">
             {stage === "trying-app" ? "Opening luv…" : "Connect on luv"}
           </h1>
 
@@ -98,7 +106,7 @@ export function Connect() {
               className="w-full mb-6 px-6 py-5 bg-[#3c3836] border border-[#504945] rounded-2xl flex items-center justify-between gap-4 hover:border-[#ebdbb2]/30 transition-colors group"
               aria-label="Copy connection code"
             >
-              <span className="text-2xl tracking-[0.35em] text-[#ebdbb2]">
+              <span className="text-3xl md:text-4xl font-semibold tracking-[0.4em] text-[#ebdbb2]">
                 {code}
               </span>
               {copied ? (
