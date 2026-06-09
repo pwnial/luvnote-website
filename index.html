@@ -19,7 +19,14 @@
     <meta name="twitter:description" content="Type something sweet. It appears instantly on your partner's lock screen widget. Private, end-to-end encrypted, just for couples." />
     <meta name="twitter:image" content="https://luvnote.app/icon-512.png" />
 
-    <meta name="theme-color" content="#282828" />
+    <meta name="theme-color" content="#1f1b18" />
+
+    <!-- Espresso document background from the very first paint — kills the white that
+         shows behind the status bar / toolbar / overscroll on mobile before the app
+         renders. Unlayered, so it beats theme.css's @layer base (light) body background. -->
+    <style>
+      html, body { background-color: #1f1b18; margin: 0; }
+    </style>
 
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
