@@ -1,0 +1,154 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   luv cinematic design kit — shared materials/foil/buttons extracted from the
+   CinematicHero so every revamped section is coherent by construction.
+   Scope the dark theme under .cinematic-theme; the material classes are global
+   (uniquely named) so sections can use them directly.
+─────────────────────────────────────────────────────────────────────────── */
+
+.cinematic-theme {
+  background: #1f1b18;
+  color: #fbf1c7;
+  --color-background: #1f1b18;
+  --color-foreground: #fbf1c7;
+  --color-muted-foreground: #a89984;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Foil / depth text -------------------------------------------------------- */
+.text-3d-matte {
+  color: #fbf1c7;
+  text-shadow: 0 8px 30px rgba(235, 219, 178, 0.18), 0 2px 4px rgba(0, 0, 0, 0.45);
+}
+.text-silver-matte {
+  background: linear-gradient(180deg, #fbf1c7 0%, #c9b990 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: translateZ(0);
+  filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.45)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+.text-rose-matte {
+  background: linear-gradient(180deg, #ecb0c0 0%, #d3869b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: translateZ(0);
+  text-shadow: none;
+  filter: drop-shadow(0 8px 20px rgba(211, 134, 155, 0.35)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+.text-card-silver-matte {
+  background: linear-gradient(180deg, #fbf1c7 0%, #bdae93 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: translateZ(0);
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.8)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+}
+
+/* Physical surfaces -------------------------------------------------------- */
+.premium-depth-card {
+  background: linear-gradient(150deg, #45303a 0%, #2a1d1e 45%, #140f0e 100%);
+  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.9), 0 20px 40px -20px rgba(0, 0, 0, 0.8),
+    inset 0 1px 2px rgba(255, 255, 255, 0.16), inset 0 -2px 4px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(235, 219, 178, 0.05);
+  position: relative;
+}
+.widget-depth {
+  background: linear-gradient(180deg, rgba(235, 219, 178, 0.07) 0%, rgba(235, 219, 178, 0.02) 100%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.07),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(235, 219, 178, 0.08);
+}
+.floating-ui-badge {
+  background: linear-gradient(135deg, rgba(235, 219, 178, 0.09) 0%, rgba(235, 219, 178, 0.012) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 0 0 1px rgba(235, 219, 178, 0.12), 0 25px 50px -12px rgba(0, 0, 0, 0.8),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18), inset 0 -1px 1px rgba(0, 0, 0, 0.5);
+}
+
+/* Tactile buttons ---------------------------------------------------------- */
+.btn-modern-light,
+.btn-modern-dark {
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.btn-modern-light {
+  background: linear-gradient(180deg, #ffffff 0%, #f4efe3 100%);
+  color: #1d1a17;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.1), 0 12px 24px -4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 1), inset 0 -3px 6px rgba(0, 0, 0, 0.06);
+}
+.btn-modern-light:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 6px 12px -2px rgba(0, 0, 0, 0.15), 0 20px 32px -6px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 1), inset 0 -3px 6px rgba(0, 0, 0, 0.06);
+}
+.btn-modern-dark {
+  background: linear-gradient(180deg, #4a383a 0%, #2c2122 100%);
+  color: #fbf1c7;
+  box-shadow: 0 0 0 1px rgba(235, 219, 178, 0.12), 0 2px 4px rgba(0, 0, 0, 0.6), 0 12px 24px -4px rgba(0, 0, 0, 0.9),
+    inset 0 1px 1px rgba(255, 255, 255, 0.14), inset 0 -3px 6px rgba(0, 0, 0, 0.8);
+}
+.btn-modern-dark:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(180deg, #5a4648 0%, #382a2b 100%);
+  box-shadow: 0 0 0 1px rgba(211, 134, 155, 0.45), 0 6px 12px -2px rgba(0, 0, 0, 0.7), 0 20px 32px -6px rgba(0, 0, 0, 1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2), inset 0 -3px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* Texture overlays --------------------------------------------------------- */
+.film-grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+}
+.bg-grid-theme {
+  background-size: 60px 60px;
+  background-image: linear-gradient(to right, rgba(235, 219, 178, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(235, 219, 178, 0.05) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+}
+
+/* Hairline section divider */
+.cinematic-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(235, 219, 178, 0.15), transparent);
+}
+
+@keyframes cinematic-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.cinematic-float { animation: cinematic-float 6s ease-in-out infinite; }
+
+/* Clean elevated surfaces for utility/content pages — lighter than the bg, real edges
+   (do NOT use the heavy premium-depth-card here; it goes muddy at small sizes). */
+.surface-panel {
+  background: linear-gradient(180deg, rgba(235, 219, 178, 0.06) 0%, rgba(235, 219, 178, 0.018) 100%);
+  border: 1px solid rgba(235, 219, 178, 0.10);
+  box-shadow: 0 24px 50px -26px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.surface-panel-hover:hover {
+  border-color: rgba(211, 134, 155, 0.30);
+  transform: translateY(-3px);
+}
+.surface-input {
+  background: #120d0b;
+  border: 1px solid rgba(235, 219, 178, 0.14);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.surface-input:focus {
+  border-color: rgba(211, 134, 155, 0.7);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(211, 134, 155, 0.22);
+  outline: none;
+}

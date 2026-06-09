@@ -11,12 +11,12 @@ export function PageNav() {
     >
       <div className="max-w-[1200px] mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <img src="/heart-love-gruvbox.gif" alt="Luv" className="w-20 h-20" style={{ imageRendering: "pixelated" as const }} />
+          <Link to="/" className="font-mono text-lg lowercase tracking-[0.18em] text-[#fbf1c7] hover:text-[#d3869b] transition-colors">
+            luv
           </Link>
           <Link
             to="/"
-            className="relative text-xs text-[#928374] hover:text-[#ebdbb2] transition-colors group"
+            className="relative text-xs text-[#928374] hover:text-[#ebdbb2] transition-colors group font-mono"
           >
             ← Home
             <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-[#ebdbb2] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />

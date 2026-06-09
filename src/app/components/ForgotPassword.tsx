@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import { motion } from "motion/react";
+import "../../styles/cinematic.css";
 
 const supabase = createClient(
   'https://fkfyhsbhsobxmiiidtrn.supabase.co',
@@ -37,153 +39,92 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: '#282828',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-      fontFamily: 'ui-monospace, "SF Mono", "Cascadia Code", monospace',
-    }}>
-      <div style={{ width: '100%', maxWidth: '400px' }}>
-        {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <img
-            src="/heart-love-gruvbox.gif"
-            alt="Luv"
-            style={{
-              width: '80px',
-              height: '80px',
-              imageRendering: 'pixelated' as any,
-              marginBottom: '20px',
-              display: 'block',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          />
-          <h1 style={{
-            fontSize: '28px',
-            fontWeight: 400,
-            color: '#ebdbb2',
-            margin: '0 0 8px 0',
-            letterSpacing: '-0.02em',
-          }}>Forgot Password</h1>
-          <p style={{
-            color: '#928374',
-            fontSize: '14px',
-            margin: 0,
-          }}>Enter your email and we'll send you a reset link</p>
+    <div className="cinematic-theme relative min-h-screen flex items-center justify-center overflow-hidden px-5 py-16">
+      {/* subtle warm depth — no heavy grid/grain murk */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(125% 80% at 50% -5%, rgba(211,134,155,0.10) 0%, transparent 55%)' }}
+      />
+
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+        className="relative w-full max-w-[400px]"
+      >
+        {/* Heading */}
+        <div className="text-center mb-9">
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#d3869b]">luv</span>
+          <h1 className="mt-5 mb-3 text-[2.6rem] leading-[1.02] font-black tracking-tight text-[#fbf1c7]">
+            Forgot password
+          </h1>
+          <p className="text-[#a89984] text-[15px] leading-relaxed max-w-[310px] mx-auto">
+            Enter your email and we&apos;ll send you a reset link.
+          </p>
         </div>
 
-        {/* Card */}
-        <div style={{
-          background: '#3c3836',
-          borderRadius: '16px',
-          border: '1px solid #504945',
-          padding: '32px',
-        }}>
+        {/* Clean elevated panel — lighter than the bg, real edges */}
+        <div
+          className="rounded-[1.6rem] p-7 border border-[#ebdbb2]/10"
+          style={{
+            background: 'linear-gradient(180deg, rgba(235,219,178,0.06) 0%, rgba(235,219,178,0.02) 100%)',
+            boxShadow: '0 30px 60px -22px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.06)',
+          }}
+        >
           {sent ? (
-            <div style={{
-              background: '#282828',
-              border: '1px solid #b8bb26',
-              borderRadius: '12px',
-              padding: '24px',
-              textAlign: 'center',
-            }}>
-              <div style={{ fontSize: '28px', marginBottom: '12px' }}>📬</div>
-              <p style={{ color: '#b8bb26', fontWeight: 500, fontSize: '15px', margin: '0 0 8px 0', lineHeight: 1.6 }}>
-                Check your inbox!
-              </p>
-              <p style={{ color: '#928374', fontSize: '13px', margin: 0, lineHeight: 1.6 }}>
-                If an account exists for <strong style={{ color: '#a89984' }}>{email}</strong>, you'll receive a password reset link shortly.
+            <div className="text-center py-4">
+              <div className="text-[30px] mb-3">📬</div>
+              <p className="text-[#fbf1c7] font-semibold text-[16px] mb-2">Check your inbox</p>
+              <p className="text-[#a89984] text-[13.5px] leading-relaxed">
+                If an account exists for{' '}
+                <span className="text-[#ebdbb2] font-medium">{email}</span>, a reset link is on its way.
               </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
               {error && (
-                <div style={{
-                  background: '#282828',
-                  border: '1px solid #fb4934',
-                  borderRadius: '10px',
-                  padding: '12px 16px',
-                  marginBottom: '20px',
-                  color: '#fb4934',
-                  fontSize: '13px',
-                }}>
+                <div className="mb-5 rounded-xl border border-[#fb4934]/35 bg-[#fb4934]/10 px-4 py-3 text-[13px] text-[#fb6b5c] leading-relaxed">
                   {error}
                 </div>
               )}
 
-              <div style={{ marginBottom: '24px' }}>
-                <label style={{
-                  display: 'block',
-                  fontSize: '13px',
-                  fontWeight: 500,
-                  color: '#a89984',
-                  marginBottom: '8px',
-                }}>Email Address</label>
+              <div className="mb-5">
+                <label
+                  htmlFor="email"
+                  className="block font-mono text-[10px] uppercase tracking-[0.18em] text-[#ebdbb2]/45 mb-2.5"
+                >
+                  Email address
+                </label>
                 <input
+                  id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   autoFocus
-                  style={{
-                    width: '100%',
-                    padding: '14px 16px',
-                    borderRadius: '10px',
-                    border: '1px solid #504945',
-                    background: '#282828',
-                    color: '#ebdbb2',
-                    fontSize: '16px',
-                    outline: 'none',
-                    boxSizing: 'border-box',
-                    transition: 'border-color 0.2s, box-shadow 0.2s',
-                    fontFamily: 'inherit',
-                  }}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = '#ebdbb2';
-                    e.target.style.boxShadow = '0 0 0 2px rgba(235, 219, 178, 0.1)';
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = '#504945';
-                    e.target.style.boxShadow = 'none';
-                  }}
+                  className="w-full rounded-xl border border-[#ebdbb2]/14 bg-[#120d0b] px-4 py-3.5 text-[15px] text-[#fbf1c7] placeholder:text-[#ebdbb2]/25 shadow-[inset_0_1px_3px_rgba(0,0,0,0.4)] outline-none transition-all focus:border-[#d3869b]/70 focus:ring-2 focus:ring-[#d3869b]/25"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                style={{
-                  width: '100%',
-                  padding: '14px',
-                  background: loading ? '#504945' : '#b8bb26',
-                  color: loading ? '#928374' : '#282828',
-                  border: 'none',
-                  borderRadius: '10px',
-                  fontSize: '15px',
-                  fontWeight: 600,
-                  cursor: loading ? 'not-allowed' : 'pointer',
-                  transition: 'all 0.2s',
-                  fontFamily: 'inherit',
-                }}
+                className="btn-modern-light w-full px-8 py-3.5 rounded-[1.1rem] text-[15px] font-semibold tracking-tight disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {loading ? 'Sending...' : 'Send Reset Link'}
+                {loading ? 'Sending…' : 'Send reset link'}
               </button>
             </form>
           )}
         </div>
 
         {/* Footer */}
-        <p style={{ textAlign: 'center', marginTop: '24px', fontSize: '13px' }}>
-          <a href="/" style={{ color: '#928374', textDecoration: 'none', transition: 'color 0.2s' }}
-             onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#ebdbb2'}
-             onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#928374'}
-          >← Back to Luv Note</a>
+        <p className="text-center mt-7 text-[13px]">
+          <a href="/" className="font-mono text-[#928374] no-underline transition-colors hover:text-[#fbf1c7]">
+            ← luv
+          </a>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }

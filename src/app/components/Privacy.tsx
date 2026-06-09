@@ -1,3 +1,4 @@
+import "../../styles/cinematic.css";
 import { motion } from "motion/react";
 import { Shield, EyeOff, UserCheck, Server } from "lucide-react";
 import { PageNav } from "./PageNav";
@@ -68,9 +69,9 @@ export function Privacy() {
           <p className="text-[#a89984] mb-3 leading-relaxed">We also use the <span className="text-[#ebdbb2]">TikTok Business SDK</span> to measure how new users discover luv through our advertising. If you grant the iOS App Tracking Transparency prompt, we share your Advertising Identifier (IDFA), basic device info, and install/launch events with TikTok for attribution. We do <span className="text-[#ebdbb2]">not</span> share your messages, partner connections, name, or email with TikTok.</p>
           <p className="text-[#a89984] mb-3 leading-relaxed">You can opt out at any time in <span className="text-[#ebdbb2]">iOS Settings → Privacy &amp; Security → Tracking → luv</span>. The app functions normally if you opt out — we just won't see attribution data.</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-[#928374]">
-            <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#b8bb26] hover:underline">supabase.com/privacy</a>
-            <a href="https://www.apple.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#b8bb26] hover:underline">apple.com/privacy</a>
-            <a href="https://www.tiktok.com/legal/page/global/privacy-policy/en" target="_blank" rel="noopener noreferrer" className="text-[#b8bb26] hover:underline">tiktok.com/privacy</a>
+            <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#d3869b] hover:underline">supabase.com/privacy</a>
+            <a href="https://www.apple.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#d3869b] hover:underline">apple.com/privacy</a>
+            <a href="https://www.tiktok.com/legal/page/global/privacy-policy/en" target="_blank" rel="noopener noreferrer" className="text-[#d3869b] hover:underline">tiktok.com/privacy</a>
           </div>
         </>
       ),
@@ -128,24 +129,34 @@ export function Privacy() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="text-white min-h-screen font-mono relative"
+      className="cinematic-theme min-h-screen relative overflow-hidden"
     >
-      <div className="fixed inset-0 z-0 bg-[#282828]" />
+      <div className="fixed inset-0 z-0 bg-[#1f1b18]" />
+      <div className="fixed inset-0 z-0 bg-grid-theme opacity-[0.4] pointer-events-none" />
+      <div className="fixed inset-0 z-0 film-grain pointer-events-none" />
       <PageNav />
 
       <div className="relative z-10">
         {/* Hero */}
-        <section className="pt-32 pb-20 px-6">
-          <div className="max-w-[900px] mx-auto">
+        <section className="pt-32 pb-20 px-6 relative">
+          {/* Rose radial glow behind title */}
+          <div
+            className="pointer-events-none absolute left-1/2 top-24 -translate-x-1/2 w-[560px] h-[560px] rounded-full blur-3xl"
+            style={{ background: "radial-gradient(circle, rgba(211,134,155,0.10) 0%, rgba(211,134,155,0) 70%)" }}
+          />
+          <div className="max-w-[900px] mx-auto relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center"
             >
-              <p className="text-xs text-[#928374] uppercase tracking-[0.2em] mb-6">Last updated January 2025</p>
-              <h1 className="text-5xl md:text-7xl font-semibold mb-6 text-[#ebdbb2]">Privacy Policy</h1>
-              <p className="text-lg text-[#a89984] max-w-lg mx-auto leading-relaxed">
+              <div className="mb-8">
+                <a href="/" className="font-mono text-[13px] tracking-wide text-[#a89984] hover:text-[#fbf1c7] transition-colors">← luv</a>
+              </div>
+              <p className="font-mono text-[11px] text-[#928374] uppercase tracking-[0.25em] mb-6">Last updated June 2026</p>
+              <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 text-silver-matte">Privacy Policy</h1>
+              <p className="text-lg text-[#ebdbb2]/70 max-w-lg mx-auto leading-relaxed">
                 Your data, your control. Here's exactly what we do — and don't do.
               </p>
             </motion.div>
@@ -160,16 +171,17 @@ export function Privacy() {
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.15 * i }}
-                  className="border border-[#504945]/60 rounded-2xl p-6 hover:border-[#504945] transition-colors"
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: 0.12 * i }}
+                  className="surface-panel surface-panel-hover rounded-3xl p-7"
                 >
-                  <div className="text-[#b8bb26] mb-4 relative">
-                    <div className="absolute -inset-1 bg-[#b8bb26]/10 rounded-full blur-md" />
+                  <div className="text-[#d3869b] mb-5 relative w-fit">
+                    <div className="absolute -inset-2 bg-[#d3869b]/15 rounded-full blur-md" />
                     <div className="relative">{card.icon}</div>
                   </div>
-                  <h3 className="text-sm text-[#ebdbb2] font-medium mb-2">{card.title}</h3>
-                  <p className="text-xs text-[#928374] leading-relaxed">{card.desc}</p>
+                  <h3 className="text-sm text-[#fbf1c7] font-semibold tracking-tight mb-2">{card.title}</h3>
+                  <p className="text-xs text-[#a89984] leading-relaxed">{card.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -178,28 +190,31 @@ export function Privacy() {
 
         {/* Sections */}
         <section className="px-6 pb-32">
-          <div className="max-w-[900px] mx-auto">
-            <div className="border-t border-[#504945]/40">
+          <div className="max-w-[820px] mx-auto">
+            <div className="cinematic-divider max-w-[600px] mx-auto mb-4" />
+            <div>
               {sections.map((section, i) => (
                 <AnimatedSection key={i} delay={0.05 * i}>
-                  <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 md:gap-12 py-10 border-b border-[#504945]/40">
+                  <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 md:gap-12 py-10">
                     <div>
-                      <span className="text-xs text-[#928374] block mb-1">{section.num}</span>
-                      <h2 className="text-base text-[#ebdbb2] font-medium">{section.title}</h2>
+                      <span className="font-mono text-[11px] text-[#928374] uppercase tracking-[0.2em] block mb-2">{section.num}</span>
+                      <h2 className="text-lg text-3d-matte font-bold tracking-tight">{section.title}</h2>
                     </div>
                     <div className="text-sm">{section.content}</div>
                   </div>
+                  {i < sections.length - 1 && <div className="cinematic-divider max-w-[600px] mx-auto" />}
                 </AnimatedSection>
               ))}
             </div>
+            <div className="cinematic-divider max-w-[600px] mx-auto mt-4" />
           </div>
         </section>
 
         {/* Footer */}
         <section className="px-6 pb-20">
           <div className="max-w-[900px] mx-auto text-center">
-            <p className="text-sm text-[#928374]">
-              Questions? <a href="mailto:privacy@luv.app" className="text-[#b8bb26] hover:underline">privacy@luv.app</a>
+            <p className="text-sm text-[#a89984]">
+              Questions? <a href="mailto:privacy@luv.app" className="text-[#d3869b] hover:underline">privacy@luv.app</a>
             </p>
           </div>
         </section>

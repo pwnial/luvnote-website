@@ -11,6 +11,8 @@ import { Connect } from "./components/Connect";
 import ResetPassword from "./components/ResetPassword";
 import ForgotPassword from "./components/ForgotPassword";
 import { AnimatedSection } from "./components/AnimatedSection";
+import { CinematicHero } from "./components/CinematicHero";
+import { HowItWorksPage } from "./components/HowItWorksPage";
 
 const INTRO_SESSION_KEY = "luv-intro-played";
 
@@ -531,10 +533,16 @@ function Home() {
 
 export default function App() {
   const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<div className="overflow-x-hidden w-full min-h-screen"><CinematicHero howItWorksHref="/how-it-works" /></div>} />
+        <Route path="/cinematic" element={<div className="overflow-x-hidden w-full min-h-screen"><CinematicHero howItWorksHref="/how-it-works" /></div>} />
+        <Route path="/old" element={<Home />} />
+        <Route path="/how-it-works" element={<HowItWorksPage />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/support" element={<Support />} />
