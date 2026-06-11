@@ -20,7 +20,8 @@ export function Privacy() {
         <>
           <p className="text-[#a89984] mb-4 leading-relaxed">When you create an account, we collect your <span className="text-[#ebdbb2]">email address</span> and <span className="text-[#ebdbb2]">display name</span>. You may optionally upload a profile picture.</p>
           <p className="text-[#a89984] mb-4 leading-relaxed"><span className="text-[#ebdbb2]">Messages</span> you send are stored to enable delivery to your partner's device. We also store connection codes and partner relationships.</p>
-          <p className="text-[#a89984] leading-relaxed">We automatically collect <span className="text-[#ebdbb2]">device identifiers</span>, push notification tokens, usage data, and crash reports to keep things running smoothly.</p>
+          <p className="text-[#a89984] mb-4 leading-relaxed">We automatically collect <span className="text-[#ebdbb2]">device identifiers</span>, push notification tokens, usage data, and crash reports to keep things running smoothly.</p>
+          <p className="text-[#a89984] leading-relaxed"><span className="text-[#ebdbb2]">Analytics.</span> We use PostHog to understand how Luv is used — events like sign-ups, partner connections, and purchases. These events are tied to a random user ID and <span className="text-[#ebdbb2]">never include the content of your notes</span>, your messages, or your partner's details.</p>
         </>
       ),
     },
@@ -47,7 +48,7 @@ export function Privacy() {
       title: "Data Sharing",
       content: (
         <p className="text-[#a89984] leading-relaxed">
-          We don't sell your data. We share information only with your <span className="text-[#ebdbb2]">connected partner</span>, <span className="text-[#ebdbb2]">service providers</span> (Supabase, Apple, TikTok for ad attribution — see section 06), when <span className="text-[#ebdbb2]">legally required</span>, or during business transfers.
+          We don't sell your data. We share information only with your <span className="text-[#ebdbb2]">connected partner</span>, <span className="text-[#ebdbb2]">service providers</span> (Supabase, Apple, PostHog for analytics, TikTok for ad attribution — see section 06), when <span className="text-[#ebdbb2]">legally required</span>, or during business transfers.
         </p>
       ),
     },
