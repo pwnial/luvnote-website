@@ -8,4 +8,6 @@
   Run `npm i` to install the dependencies.
 
   Run `npm run dev` to start the development server.
-  
+
+  Run `npm test` to verify that public routes do not reintroduce unsupported
+  encryption, tracking, advertising SDK, or contact-address claims.

@@ -65,8 +65,8 @@ function Home() {
       answer: "When you send a message in the Luv app, it instantly appears on your partner's home screen widget using silent push notifications. No need to open the app - it just updates automatically."
     },
     {
-      question: "Is it really end-to-end encrypted?",
-      answer: "Yes. All messages are encrypted on your device before being sent, and can only be decrypted by your partner's device. We can't read your messages - they're yours alone."
+      question: "How are my notes protected?",
+      answer: "Notes are encrypted in transit and at rest by our managed infrastructure. In the app, access is limited to you and your connected partner. Luv processes and stores note content to deliver the feature; this is managed service encryption, not client-only encryption."
     },
     {
       question: "Does it work with Android?",
@@ -314,9 +314,9 @@ function Home() {
                 <Lock className="w-5 h-5 text-[#ebdbb2]" />
               </motion.div>
               <div>
-                <h3 className="text-2xl md:text-3xl text-[#ebdbb2] mb-3">Completely private</h3>
+                <h3 className="text-2xl md:text-3xl text-[#ebdbb2] mb-3">Private by design</h3>
                 <p className="text-[#a89984] leading-relaxed">
-                  End-to-end encrypted. We can't read your messages and we never will. What you say stays between you two.
+                  Notes are encrypted in transit and at rest by our managed infrastructure. In the app, access is limited to you and your connected partner; Luv processes notes to deliver them.
                 </p>
               </div>
             </div>
@@ -467,7 +467,7 @@ function Home() {
               <span className="text-[#d5c4a1]">today</span>
             </h2>
             <p className="text-base text-[#a89984] mb-12 max-w-md mx-auto">
-              Free to download. No ads. No tracking. Just you two.
+              Free to download. No ads. No social feed. Just you two.
             </p>
             <motion.a
               href="https://apps.apple.com/app/id6763015481"
@@ -491,7 +491,7 @@ function Home() {
               <div>•</div>
               <div>No ads</div>
               <div>•</div>
-              <div>E2EE</div>
+              <div>Encrypted</div>
             </div>
           </div>
         </AnimatedSection>

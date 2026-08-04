@@ -250,7 +250,7 @@ export function Terms() {
         <section className="px-6 pb-20">
           <div className="max-w-[900px] mx-auto text-center">
             <p className="text-sm text-[#a89984]">
-              Questions? <a href="mailto:support@luv.app" className="text-[#d3869b] hover:underline">support@luv.app</a>
+              Questions? <a href="mailto:support@luvnote.app" className="text-[#d3869b] hover:underline">support@luvnote.app</a>
             </p>
           </div>
         </section>

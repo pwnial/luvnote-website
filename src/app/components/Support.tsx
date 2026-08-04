@@ -12,7 +12,7 @@ export function Support() {
     { question: "How do I connect with my partner?", answer: "Both of you need to download the app. One person generates a connection code in Settings, and the other enters that code to connect. Once connected, your widgets will sync automatically." },
     { question: "Why isn't the widget updating?", answer: "Make sure you've added the Luv widget to your home screen, granted notification permissions, and have a stable internet connection. Try removing and re-adding the widget if issues persist." },
     { question: "Can I use Luv with multiple partners?", answer: "No, Luv is designed exclusively for couples. Each account can only be connected to one partner at a time to maintain the intimate, personal nature of the app." },
-    { question: "Is my data secure and private?", answer: "Yes! All messages are end-to-end encrypted. We can't read your messages, and they're only shared between you and your connected partner. See our Privacy Policy for full details." },
+    { question: "How are my notes protected?", answer: "Notes are encrypted in transit and at rest by our managed infrastructure. In the app, access is limited to you and your connected partner. Luv processes and stores note content to deliver the feature; see our Privacy Policy for full details." },
     { question: "How do I cancel my subscription?", answer: "Subscriptions are managed through the App Store. Go to Settings → [Your Name] → Subscriptions → Luv, then tap Cancel Subscription." },
     { question: "What iOS version do I need?", answer: "Luv requires iOS 18.5 or later to support home screen widgets and the latest notification features." },
     { question: "Can I customize the widget appearance?", answer: "Yes! Premium subscribers can customize widget colors, fonts, and styles. Free users get the default Gruvbox theme." },
@@ -105,7 +105,7 @@ export function Support() {
             <div className="grid md:grid-cols-2 gap-6">
               <AnimatedSection delay={0.1}>
                 <a
-                  href="mailto:support@luv.app"
+                  href="mailto:support@luvnote.app"
                   className="surface-panel block rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#d3869b]/30 group"
                 >
                   <div className="mb-6 w-fit">
@@ -120,12 +120,12 @@ export function Support() {
                   <p className="text-sm text-[#928374] mb-5 leading-relaxed">
                     General inquiries and account issues
                   </p>
-                  <span className="font-mono text-sm text-[#d3869b]">support@luv.app</span>
+                  <span className="font-mono text-sm text-[#d3869b]">support@luvnote.app</span>
                 </a>
               </AnimatedSection>
               <AnimatedSection delay={0.15}>
                 <a
-                  href="mailto:bug@luv.app"
+                  href="mailto:support@luvnote.app"
                   className="surface-panel block rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#d3869b]/30 group"
                 >
                   <div className="mb-6 w-fit">
@@ -140,7 +140,7 @@ export function Support() {
                   <p className="text-sm text-[#928374] mb-5 leading-relaxed">
                     Found a technical issue? Let us know
                   </p>
-                  <span className="font-mono text-sm text-[#d3869b]">bug@luv.app</span>
+                  <span className="font-mono text-sm text-[#d3869b]">support@luvnote.app</span>
                 </a>
               </AnimatedSection>
             </div>
@@ -236,7 +236,7 @@ export function Support() {
         <section className="px-6 pb-24">
           <div className="max-w-[900px] mx-auto text-center">
             <p className="text-sm text-[#928374]">
-              Still need help? <a href="mailto:support@luv.app" className="text-[#d3869b] hover:underline">support@luv.app</a>
+              Still need help? <a href="mailto:support@luvnote.app" className="text-[#d3869b] hover:underline">support@luvnote.app</a>
             </p>
           </div>
         </section>
