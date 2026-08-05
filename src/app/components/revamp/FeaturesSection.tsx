@@ -16,8 +16,8 @@ const PILLARS: Pillar[] = [
   {
     index: "02",
     icon: Lock,
-    title: "Completely private",
-    body: "End-to-end encrypted. We can't read your messages and we never will. What you say stays between you two.",
+    title: "Private by design",
+    body: "Notes are encrypted in transit and at rest by our managed infrastructure. In the app, access is limited to you and your connected partner; Luv processes notes to deliver them.",
   },
   {
     index: "03",

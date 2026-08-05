@@ -431,7 +431,7 @@ export function CinematicHero({
           <span className="text-[#ebdbb2]/20">·</span>
           <span>iOS 18.5+</span>
           <span className="text-[#ebdbb2]/20">·</span>
-          <span>End-to-end encrypted</span>
+          <span>Encrypted in transit &amp; at rest</span>
         </div>
       </div>
 

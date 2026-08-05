@@ -8,8 +8,8 @@ const FAQS = [
     a: "When you send a message in the Luv app, it instantly appears on your partner's home screen widget using silent push notifications. No need to open the app — it just updates automatically.",
   },
   {
-    q: "Is it really end-to-end encrypted?",
-    a: "Yes. All messages are encrypted on your device before being sent, and can only be decrypted by your partner's device. We can't read your messages — they're yours alone.",
+    q: "How are my notes protected?",
+    a: "Notes are encrypted in transit and at rest by our managed infrastructure. In the app, a note is available only to you and your connected partner. Luv's service processes and stores note content to deliver the feature; this is managed service encryption, not client-only encryption.",
   },
   {
     q: "Does it work with Android?",
@@ -199,7 +199,7 @@ export function FaqSection() {
               <p className="text-[#928374] text-sm mt-1">We usually reply within a day.</p>
             </div>
             <motion.a
-              href="mailto:hello@luv.app"
+              href="mailto:support@luvnote.app"
               className="btn-modern-dark px-8 py-4 rounded-[1.25rem] whitespace-nowrap text-sm font-medium"
               whileHover={reduced ? undefined : { y: -2, scale: 1.02 }}
               whileTap={reduced ? undefined : { scale: 0.98 }}

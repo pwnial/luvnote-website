@@ -318,7 +318,7 @@ export function HowItWorksFilm() {
         <div className="annot-2">
           <div className="annot-line h-px w-12 mb-4" />
           <h3 className="text-3d-matte text-2xl md:text-3xl font-bold tracking-tight mb-2">Only you two.</h3>
-          <p className="text-[#a89984] leading-relaxed max-w-[40ch]">End-to-end encrypted before it ever leaves your phone. We can&apos;t read it. No one can.</p>
+          <p className="text-[#a89984] leading-relaxed max-w-[40ch]">Your note is encrypted in transit and at rest. Luv processes it to deliver the note, while app access stays limited to you and your connected partner.</p>
         </div>
         <div className="annot-3">
           <div className="annot-line h-px w-12 mb-4" />
