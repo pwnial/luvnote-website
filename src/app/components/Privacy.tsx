@@ -92,7 +92,7 @@ export function Privacy() {
       content: (
         <>
           <p className="text-[#a89984] mb-4 leading-relaxed">We generally retain account, relationship, and note data while your account is active and as reasonably needed to provide, secure, and support the service. Different records may be kept for different periods for fraud prevention, accounting, legal compliance, dispute resolution, or backup recovery.</p>
-          <p className="text-[#a89984] leading-relaxed">Account deletion is asynchronous. A request is not complete merely because you tapped Delete Account: wait for the in-app status to confirm completion. The app may report that a request is unconfirmed, delayed, or temporarily unavailable. If in-app deletion is unavailable or you cannot access the app, contact <a href="mailto:privacy@luvnote.app" className="text-[#d3869b] hover:underline">privacy@luvnote.app</a>.</p>
+          <p className="text-[#a89984] leading-relaxed">Account deletion is asynchronous. A request is not complete merely because you tapped Delete Account: wait for the in-app status to confirm completion. The app may report that a request is unconfirmed, delayed, or temporarily unavailable. If in-app deletion is unavailable or you cannot access the app, contact <a href="mailto:support@luvnote.app?subject=Luv%20privacy%20request" className="text-[#d3869b] hover:underline">support@luvnote.app</a>.</p>
         </>
       ),
     },
@@ -101,7 +101,7 @@ export function Privacy() {
       title: "Your Rights",
       content: (
         <p className="text-[#a89984] leading-relaxed">
-          You can update certain profile information in the app. Depending on where you live, you may also have rights to request access, correction, deletion, restriction, portability, or an explanation of how we process your personal information. Send requests to <a href="mailto:privacy@luvnote.app" className="text-[#d3869b] hover:underline">privacy@luvnote.app</a>. We may need to verify your identity before responding.
+          You can update certain profile information in the app. Depending on where you live, you may also have rights to request access, correction, deletion, restriction, portability, or an explanation of how we process your personal information. Send requests to <a href="mailto:support@luvnote.app?subject=Luv%20privacy%20request" className="text-[#d3869b] hover:underline">support@luvnote.app</a>. We may need to verify your identity before responding.
         </p>
       ),
     },
@@ -128,7 +128,7 @@ export function Privacy() {
       title: "Scope, Operator & Contact",
       content: (
         <p className="text-[#a89984] leading-relaxed">
-          This policy covers the Luv iOS app and luvnote.app. Privacy and data-rights requests are handled by the independent developer operating Luv at <a href="mailto:privacy@luvnote.app" className="text-[#d3869b] hover:underline">privacy@luvnote.app</a>, and general support requests can be sent to <a href="mailto:support@luvnote.app" className="text-[#d3869b] hover:underline">support@luvnote.app</a>.
+          This policy covers the Luv iOS app and luvnote.app. Privacy, data-rights, and general support requests are handled by the independent developer operating Luv at <a href="mailto:support@luvnote.app" className="text-[#d3869b] hover:underline">support@luvnote.app</a>.
         </p>
       ),
     },
@@ -234,7 +234,7 @@ export function Privacy() {
         <section className="px-6 pb-20">
           <div className="max-w-[900px] mx-auto text-center">
             <p className="text-sm text-[#a89984]">
-              Questions? <a href="mailto:privacy@luvnote.app" className="text-[#d3869b] hover:underline">privacy@luvnote.app</a>
+              Questions? <a href="mailto:support@luvnote.app?subject=Luv%20privacy%20request" className="text-[#d3869b] hover:underline">support@luvnote.app</a>
             </p>
           </div>
         </section>

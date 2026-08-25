@@ -213,6 +213,23 @@ test("direct routes, refreshed routes, metadata, 404, and headers are production
   expect(externalRequests).toEqual([]);
 });
 
+test("public contact links route to the verified support inbox", async ({ page, context }) => {
+  const externalRequests = await installExternalGuard(context);
+
+  for (const path of ["/support", "/privacy", "/terms"]) {
+    await page.goto(path, { waitUntil: "domcontentloaded" });
+    const mailtoLinks = await page.locator('a[href^="mailto:"]').evaluateAll((links) =>
+      links.map((link) => link.getAttribute("href")),
+    );
+    expect(mailtoLinks.length, `${path} has a public contact path`).toBeGreaterThan(0);
+    for (const href of mailtoLinks) {
+      expect(href, `${path} uses the verified inbox`).toMatch(/^mailto:support@luvnote\.app(?:\?|$)/);
+    }
+  }
+
+  expect(externalRequests).toEqual([]);
+});
+
 test("invite routes match the native parser and require explicit copy, open, or install choices", async ({ page, context }) => {
   const externalRequests = await installExternalGuard(context);
   await context.addInitScript(() => {

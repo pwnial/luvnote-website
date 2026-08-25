@@ -17,7 +17,7 @@ export function Support() {
     { question: "How do I manage or restore a purchase?", answer: "If Apple shows an active Luv subscription, manage or cancel it from Settings → [Your Name] → Subscriptions on your Apple device. For an eligible purchase, use Restore Purchases inside Luv while signed in to the Luv account that should receive access and the Apple Account that owns the purchase. Premium appears only after Apple and Luv confirm the purchase and account association. If a restore stays pending, contact support. Apple handles App Store refund requests." },
     { question: "What system version do I need?", answer: "Luv requires iOS or iPadOS 18.5 or later to support its widgets and background refresh features." },
     { question: "Where can I add the widget?", answer: "Luv supports small and medium Home Screen widgets and a rectangular Lock Screen widget. Add widgets through the iOS or iPadOS widget editor after opening Luv at least once." },
-    { question: "What happens if I delete the app or my account?", answer: "Deleting the app does not delete your Luv account or stored notes. To request account deletion, use Delete Account in Luv Settings. Processing is asynchronous, so wait for the app to confirm completion. If the request is unavailable, delayed, or you cannot access the app, email privacy@luvnote.app." },
+    { question: "What happens if I delete the app or my account?", answer: "Deleting the app does not delete your Luv account or stored notes. To request account deletion, use Delete Account in Luv Settings. Processing is asynchronous, so wait for the app to confirm completion. If the request is unavailable, delayed, or you cannot access the app, email support@luvnote.app." },
   ];
 
   return (
@@ -130,7 +130,7 @@ export function Support() {
               </AnimatedSection>
               <AnimatedSection delay={0.15}>
                 <a
-                  href="mailto:bug@luvnote.app"
+                  href="mailto:support@luvnote.app?subject=Luv%20bug%20report"
                   className="surface-panel block rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#d3869b]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d3869b] focus-visible:ring-offset-4 focus-visible:ring-offset-[#1f1b18] group"
                 >
                   <div className="mb-6 w-fit">
@@ -145,7 +145,7 @@ export function Support() {
                   <p className="text-sm text-[#928374] mb-5 leading-relaxed">
                     Found a technical issue? Let us know
                   </p>
-                  <span className="font-mono text-sm text-[#d3869b]">bug@luvnote.app</span>
+                  <span className="font-mono text-sm text-[#d3869b]">support@luvnote.app</span>
                 </a>
               </AnimatedSection>
             </div>

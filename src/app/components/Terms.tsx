@@ -50,7 +50,7 @@ export function Terms() {
             To use certain features, create an account with your email and display name. You're responsible for maintaining confidentiality of your credentials and all activity under your account.
           </p>
           <p className="text-[#a89984] leading-relaxed">
-            You may submit an account-deletion request through Settings when that service is available. Deletion is asynchronous and is not complete until the app confirms completion. If the request cannot be submitted or you cannot access the app, contact <a href="mailto:privacy@luvnote.app" className="text-[#d3869b] hover:underline">privacy@luvnote.app</a>. We may suspend or terminate accounts that violate these terms.
+            You may submit an account-deletion request through Settings when that service is available. Deletion is asynchronous and is not complete until the app confirms completion. If the request cannot be submitted or you cannot access the app, contact <a href="mailto:support@luvnote.app?subject=Luv%20privacy%20request" className="text-[#d3869b] hover:underline">support@luvnote.app</a>. We may suspend or terminate accounts that violate these terms.
           </p>
         </>
       ),
