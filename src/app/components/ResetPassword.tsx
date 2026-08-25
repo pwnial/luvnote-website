@@ -1,12 +1,7 @@
 import { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
 import { motion } from "motion/react";
+import { supabase } from "../../lib/supabase";
 import "../../styles/cinematic.css";
-
-const supabase = createClient(
-  'https://fkfyhsbhsobxmiiidtrn.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZrZnloc2Joc29ieG1paWlkdHJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg2NDUyNDQsImV4cCI6MjA3NDIyMTI0NH0.kwn4lcEd4Xa5tA3p2rfnHhKn__6_GwkySNy5HDGfams'
-);
 
 export default function ResetPassword() {
   const [password, setPassword] = useState('');
@@ -22,14 +17,17 @@ export default function ResetPassword() {
       setReady(true);
     }
 
-    supabase.auth.onAuthStateChange((event) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === 'PASSWORD_RECOVERY') {
         setReady(true);
       }
     });
 
     const timer = setTimeout(() => setReady(true), 2000);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      subscription.unsubscribe();
+    };
   }, []);
 
   const handleReset = async (e: React.FormEvent) => {

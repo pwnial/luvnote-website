@@ -16,4 +16,15 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // GSAP powers the cinematic landing page but does not need to inflate
+        // the core application chunk used to resolve every route.
+        manualChunks: {
+          gsap: ['gsap', 'gsap/ScrollTrigger'],
+        },
+      },
+    },
+  },
 })

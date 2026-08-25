@@ -1,18 +1,21 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { lazy, Suspense, useState, useEffect, useRef, useCallback } from "react";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { Heart, Download, ChevronDown, Zap, Lock } from "lucide-react";
 import { PhoneWidget } from "./components/PhoneWidget";
 import { HeroPhones } from "./components/HeroPhones";
-import { Privacy } from "./components/Privacy";
-import { Terms } from "./components/Terms";
-import { Support } from "./components/Support";
-import { Connect } from "./components/Connect";
-import ResetPassword from "./components/ResetPassword";
-import ForgotPassword from "./components/ForgotPassword";
 import { AnimatedSection } from "./components/AnimatedSection";
 import { CinematicHero } from "./components/CinematicHero";
-import { HowItWorksPage } from "./components/HowItWorksPage";
+
+const Privacy = lazy(() => import("./components/Privacy").then(({ Privacy }) => ({ default: Privacy })));
+const Terms = lazy(() => import("./components/Terms").then(({ Terms }) => ({ default: Terms })));
+const Support = lazy(() => import("./components/Support").then(({ Support }) => ({ default: Support })));
+const Connect = lazy(() => import("./components/Connect").then(({ Connect }) => ({ default: Connect })));
+const ForgotPassword = lazy(() => import("./components/ForgotPassword"));
+const ResetPassword = lazy(() => import("./components/ResetPassword"));
+const HowItWorksPage = lazy(() =>
+  import("./components/HowItWorksPage").then(({ HowItWorksPage }) => ({ default: HowItWorksPage }))
+);
 
 const INTRO_SESSION_KEY = "luv-intro-played";
 
@@ -537,19 +540,21 @@ export default function App() {
     window.scrollTo(0, 0);
   }, [location.pathname]);
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<div className="overflow-x-hidden w-full min-h-screen"><CinematicHero howItWorksHref="/how-it-works" /></div>} />
-        <Route path="/cinematic" element={<div className="overflow-x-hidden w-full min-h-screen"><CinematicHero howItWorksHref="/how-it-works" /></div>} />
-        <Route path="/old" element={<Home />} />
-        <Route path="/how-it-works" element={<HowItWorksPage />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/support" element={<Support />} />
-        <Route path="/connect" element={<Connect />} />
-        <Route path="/forgot" element={<ForgotPassword />} />
-        <Route path="/reset" element={<ResetPassword />} />
-      </Routes>
-    </AnimatePresence>
+    <Suspense fallback={<div className="min-h-screen w-full bg-[#1f1b18]" aria-label="Loading page" />}>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<div className="overflow-x-hidden w-full min-h-screen"><CinematicHero howItWorksHref="/how-it-works" /></div>} />
+          <Route path="/cinematic" element={<div className="overflow-x-hidden w-full min-h-screen"><CinematicHero howItWorksHref="/how-it-works" /></div>} />
+          <Route path="/old" element={<Home />} />
+          <Route path="/how-it-works" element={<HowItWorksPage />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/connect" element={<Connect />} />
+          <Route path="/forgot" element={<ForgotPassword />} />
+          <Route path="/reset" element={<ResetPassword />} />
+        </Routes>
+      </AnimatePresence>
+    </Suspense>
   );
 }
