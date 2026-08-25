@@ -30,7 +30,7 @@ const COST = (() => {
 const DIGIT_H = 64;
 const DIGIT_W = DIGIT_H * 0.55;
 
-function RollingDigit({ value, isColon, reduce }: { value: number; isColon?: boolean; reduce?: boolean }) {
+function RollingDigit({ value = 0, isColon, reduce }: { value?: number; isColon?: boolean; reduce?: boolean }) {
   if (isColon) {
     return <div className="flex items-center justify-center text-[#fbf1c7] font-extralight" style={{ fontSize: DIGIT_H, lineHeight: 1, width: DIGIT_W * 0.55, height: DIGIT_H }}>:</div>;
   }

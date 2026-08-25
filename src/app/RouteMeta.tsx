@@ -16,7 +16,7 @@ function metadataForPath(pathname: string): PageMeta {
   const metadata = routeMetadata as Record<string, PageMeta>;
   if (pathname.startsWith("/c/")) return metadata["/connect"];
   if (metadata[pathname]) return metadata[pathname];
-  return { ...metadata.__not_found__, canonicalPath: pathname };
+  return metadata.__not_found__;
 }
 
 function upsertMeta(attribute: "name" | "property", key: string, content: string) {
@@ -39,22 +39,28 @@ function upsertCanonical(href: string) {
   element.href = href;
 }
 
+function removeCanonicalAndOpenGraphURL() {
+  document.head.querySelector('link[rel="canonical"]')?.remove();
+  document.head.querySelector('meta[property="og:url"]')?.remove();
+}
+
 export function RouteMeta() {
   const { pathname } = useLocation();
 
   useEffect(() => {
     const meta = metadataForPath(pathname);
-    const canonical = `${SITE_ORIGIN}${meta.canonicalPath ?? pathname}`;
+    const canonical = meta.canonicalPath ? `${SITE_ORIGIN}${meta.canonicalPath}` : null;
 
     document.title = meta.title;
-    upsertCanonical(canonical);
+    if (canonical) upsertCanonical(canonical);
+    else removeCanonicalAndOpenGraphURL();
     upsertMeta("name", "description", meta.description);
     upsertMeta("name", "robots", meta.robots);
     upsertMeta("property", "og:type", "website");
     upsertMeta("property", "og:site_name", "Luv");
     upsertMeta("property", "og:title", meta.title);
     upsertMeta("property", "og:description", meta.description);
-    upsertMeta("property", "og:url", canonical);
+    if (canonical) upsertMeta("property", "og:url", canonical);
     upsertMeta("property", "og:image", DEFAULT_IMAGE);
     upsertMeta("name", "twitter:card", "summary");
     upsertMeta("name", "twitter:title", meta.title);

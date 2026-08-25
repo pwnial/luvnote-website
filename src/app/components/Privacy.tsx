@@ -1,10 +1,11 @@
 import "../../styles/cinematic.css";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { Shield, EyeOff, UserCheck, Server } from "lucide-react";
 import { PageNav } from "./PageNav";
 import { AnimatedSection } from "./AnimatedSection";
 
 export function Privacy() {
+  const reduceMotion = useReducedMotion();
   const tldrCards = [
     { icon: <Shield className="w-5 h-5" />, title: "Stored for Delivery", desc: "Notes are encrypted in transit and stored by Luv; they are not end-to-end encrypted" },
     { icon: <EyeOff className="w-5 h-5" />, title: "No Data-Broker Sale", desc: "We do not sell personal information for money; Meta attribution may count as sharing under some laws" },
@@ -60,8 +61,8 @@ export function Privacy() {
       num: "05",
       title: "Push Notifications",
       content: (
-        <p className="text-[#a89984] leading-relaxed">
-          Luv stores an Apple Push Notification service token and related app-generated device or session identifiers to request background widget refreshes. The background signal is designed not to contain your note text; the app retrieves the note from Luv's backend. Apple and iOS control whether and when a background update runs, so widget delivery is not guaranteed to be immediate. Disabling notifications, force-quitting the app, connectivity problems, or system scheduling may delay updates until the app is opened again.
+          <p className="text-[#a89984] leading-relaxed">
+          Luv stores an Apple Push Notification service token and related app-generated device or session identifiers to request background widget refreshes. The background signal is designed not to contain your note text; the app retrieves the note from Luv's backend. Visible alert, sound, and badge permission is separate from this silent background request and is not required for it. Apple controls whether and when a background update runs, so widget delivery is not guaranteed to be immediate. Disabling Background App Refresh, force-quitting the app, connectivity problems, or system scheduling may delay updates until the app is opened again.
         </p>
       ),
     },
@@ -143,11 +144,11 @@ export function Privacy() {
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
+    <motion.main
+      initial={reduceMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: reduceMotion ? 0 : 0.3 }}
       className="cinematic-theme min-h-screen relative overflow-hidden"
     >
       <div className="fixed inset-0 z-0 bg-[#1f1b18]" />
@@ -165,9 +166,9 @@ export function Privacy() {
           />
           <div className="max-w-[900px] mx-auto relative">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: reduceMotion ? 0 : 0.6 }}
               className="text-center"
             >
               <div className="mb-8">
@@ -189,17 +190,17 @@ export function Privacy() {
               {tldrCards.map((card, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.5, delay: 0.12 * i }}
+                  transition={{ duration: reduceMotion ? 0 : 0.5, delay: reduceMotion ? 0 : 0.12 * i }}
                   className="surface-panel surface-panel-hover rounded-3xl p-7"
                 >
                   <div className="text-[#d3869b] mb-5 relative w-fit">
                     <div className="absolute -inset-2 bg-[#d3869b]/15 rounded-full blur-md" />
                     <div className="relative">{card.icon}</div>
                   </div>
-                  <h3 className="text-sm text-[#fbf1c7] font-semibold tracking-tight mb-2">{card.title}</h3>
+                  <p className="text-sm text-[#fbf1c7] font-semibold tracking-tight mb-2">{card.title}</p>
                   <p className="text-xs text-[#a89984] leading-relaxed">{card.desc}</p>
                 </motion.div>
               ))}
@@ -238,6 +239,6 @@ export function Privacy() {
           </div>
         </section>
       </div>
-    </motion.div>
+    </motion.main>
   );
 }

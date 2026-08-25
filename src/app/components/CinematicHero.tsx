@@ -210,7 +210,7 @@ export function CinematicHero({
   noteText = "thinking of you right now",
   partnerName = "Sam",
   ctaHeading = "Say it on their lock screen.",
-  ctaDescription = "Download luv, connect with your person, and leave your first note in under two minutes. Free to start — just you two.",
+  ctaDescription = "Download luv, connect with your person, and leave a note for their next glance. Free to start — just you two.",
   howItWorksHref = "/how-it-works",
   className,
   ...props
@@ -346,7 +346,7 @@ export function CinematicHero({
     <div
       ref={containerRef}
       className={cn(
-        "relative w-screen h-screen overflow-hidden flex items-center justify-center bg-[#1f1b18] text-[#fbf1c7] antialiased",
+        "cinematic-theme relative w-screen h-screen overflow-hidden flex items-center justify-center bg-[#1f1b18] text-[#fbf1c7] antialiased",
         className
       )}
       style={{
@@ -409,13 +409,13 @@ export function CinematicHero({
         aria-label="Legal and support"
         className="fixed bottom-4 left-4 z-[90] flex items-center gap-3 rounded-full border border-[#ebdbb2]/10 bg-[#1f1b18]/78 px-4 py-2.5 font-mono text-[9px] uppercase tracking-[0.14em] text-[#928374] shadow-[0_16px_38px_-20px_rgba(0,0,0,0.95)] backdrop-blur-xl sm:left-6"
       >
-        <Link className="transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:text-[#fbf1c7]" to="/privacy">privacy</Link>
+        <Link className="rounded-sm transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:text-[#fbf1c7] focus-visible:ring-2 focus-visible:ring-[#d3869b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1f1b18]" to="/privacy">privacy</Link>
         <span aria-hidden="true" className="text-[#ebdbb2]/20">·</span>
-        <Link className="transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:text-[#fbf1c7]" to="/terms">terms</Link>
+        <Link className="rounded-sm transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:text-[#fbf1c7] focus-visible:ring-2 focus-visible:ring-[#d3869b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1f1b18]" to="/terms">terms</Link>
         <span aria-hidden="true" className="text-[#ebdbb2]/20 md:hidden">·</span>
-        <Link className="transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:text-[#fbf1c7] md:hidden" to="/support">support</Link>
+        <Link className="rounded-sm transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:text-[#fbf1c7] focus-visible:ring-2 focus-visible:ring-[#d3869b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1f1b18] md:hidden" to="/support">support</Link>
         <span aria-hidden="true" className="text-[#ebdbb2]/20 sm:hidden">·</span>
-        <Link className="transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:text-[#fbf1c7] sm:hidden" to={howItWorksHref}>how it works</Link>
+        <Link className="rounded-sm transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:text-[#fbf1c7] focus-visible:ring-2 focus-visible:ring-[#d3869b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1f1b18] sm:hidden" to={howItWorksHref}>how it works</Link>
       </nav>
 
       {/* scroll cue — appears after the intro text, fades on first scroll */}
@@ -426,11 +426,13 @@ export function CinematicHero({
 
       {/* BACKGROUND LAYER: Hero text */}
       <div className="hero-text-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 will-change-transform transform-style-3d">
-        <h1 className="text-track gsap-reveal text-3d-matte text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">
-          {tagline1}
-        </h1>
-        <h1 className="text-days gsap-reveal text-silver-matte text-4xl md:text-6xl lg:text-[5rem] font-extrabold tracking-tighter">
-          {tagline2}
+        <h1 className="m-0 flex flex-col items-center">
+          <span className="text-track gsap-reveal text-3d-matte block text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2">
+            {tagline1}
+          </span>
+          <span className="text-days gsap-reveal text-silver-matte block text-4xl md:text-6xl lg:text-[5rem] font-extrabold tracking-tighter">
+            {tagline2}
+          </span>
         </h1>
       </div>
 
@@ -573,8 +575,8 @@ export function CinematicHero({
                     <span className="text-base lg:text-lg drop-shadow-lg" aria-hidden="true">💌</span>
                   </div>
                   <div>
-                    <p className="text-[#fbf1c7] text-xs lg:text-sm font-bold tracking-tight">Delivered to {partnerName}</p>
-                    <p className="text-[#ebdbb2]/50 text-[10px] lg:text-xs font-medium">On their lock screen</p>
+                    <p className="text-[#fbf1c7] text-xs lg:text-sm font-bold tracking-tight">Saved for {partnerName}</p>
+                    <p className="text-[#ebdbb2]/50 text-[10px] lg:text-xs font-medium">Ready for their next refresh</p>
                   </div>
                 </div>
 

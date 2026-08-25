@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, useReducedMotion, type TargetAndTransition } from "motion/react";
 import { useInView } from "./useInView";
 
 type AnimationType = "fade-up" | "fade-left" | "fade-right" | "scale-in" | "blur-in";
@@ -10,7 +10,7 @@ interface AnimatedSectionProps {
   animation?: AnimationType;
 }
 
-const animations: Record<AnimationType, { initial: object; animate: object }> = {
+const animations: Record<AnimationType, { initial: TargetAndTransition; animate: TargetAndTransition }> = {
   "fade-up": {
     initial: { opacity: 0, y: 30, filter: "blur(4px)" },
     animate: { opacity: 1, y: 0, filter: "blur(0px)" },
@@ -35,19 +35,20 @@ const animations: Record<AnimationType, { initial: object; animate: object }> = 
 
 export function AnimatedSection({ children, delay = 0, className = "", animation = "fade-up" }: AnimatedSectionProps) {
   const { ref, isInView } = useInView({ threshold: 0.1, triggerOnce: true });
+  const reduceMotion = useReducedMotion();
   const anim = animations[animation];
 
   return (
     <motion.div
       ref={ref}
-      initial={anim.initial}
-      animate={isInView ? anim.animate : {}}
+      initial={reduceMotion ? false : anim.initial}
+      animate={reduceMotion || isInView ? anim.animate : {}}
       transition={{ 
-        duration: 0.7, 
-        delay, 
+        duration: reduceMotion ? 0 : 0.7,
+        delay: reduceMotion ? 0 : delay,
         ease: [0.25, 0.1, 0.25, 1.0]
       }}
-      style={{ willChange: isInView ? 'auto' : 'opacity, transform, filter' }}
+      style={{ willChange: reduceMotion || isInView ? 'auto' : 'opacity, transform, filter' }}
       className={className}
     >
       {children}

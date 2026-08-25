@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from "motion/react";
 import { supabase } from "../../lib/supabase";
 import "../../styles/cinematic.css";
@@ -8,6 +8,11 @@ export default function ForgotPassword() {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
+  const statusRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (sent) statusRef.current?.focus();
+  }, [sent]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +39,7 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="cinematic-theme relative min-h-screen flex items-center justify-center overflow-hidden px-5 py-16">
+    <main className="cinematic-theme relative min-h-screen flex items-center justify-center overflow-hidden px-5 py-16">
       {/* subtle warm depth — no heavy grid/grain murk */}
       <div
         aria-hidden
@@ -68,8 +73,8 @@ export default function ForgotPassword() {
           }}
         >
           {sent ? (
-            <div className="text-center py-4">
-              <div className="text-[30px] mb-3">📬</div>
+            <div ref={statusRef} tabIndex={-1} role="status" aria-live="polite" className="text-center py-4 focus:outline-none">
+              <div className="text-[30px] mb-3" aria-hidden="true">📬</div>
               <p className="text-[#fbf1c7] font-semibold text-[16px] mb-2">Check your inbox</p>
               <p className="text-[#a89984] text-[13.5px] leading-relaxed">
                 If an account exists for{' '}
@@ -79,7 +84,7 @@ export default function ForgotPassword() {
           ) : (
             <form onSubmit={handleSubmit}>
               {error && (
-                <div className="mb-5 rounded-xl border border-[#fb4934]/35 bg-[#fb4934]/10 px-4 py-3 text-[13px] text-[#fb6b5c] leading-relaxed">
+                <div role="alert" className="mb-5 rounded-xl border border-[#fb4934]/35 bg-[#fb4934]/10 px-4 py-3 text-[13px] text-[#fb6b5c] leading-relaxed">
                   {error}
                 </div>
               )}
@@ -98,6 +103,8 @@ export default function ForgotPassword() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   autoFocus
+                  autoComplete="email"
+                  required
                   className="w-full rounded-xl border border-[#ebdbb2]/14 bg-[#120d0b] px-4 py-3.5 text-[15px] text-[#fbf1c7] placeholder:text-[#ebdbb2]/25 shadow-[inset_0_1px_3px_rgba(0,0,0,0.4)] outline-none transition-all focus:border-[#d3869b]/70 focus:ring-2 focus:ring-[#d3869b]/25"
                 />
               </div>
@@ -120,6 +127,6 @@ export default function ForgotPassword() {
           </a>
         </p>
       </motion.div>
-    </div>
+    </main>
   );
 }

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion } from "motion/react";
+import { useState, useEffect, useRef } from 'react';
+import { motion, useReducedMotion } from "motion/react";
 import {
   clearPasswordRecoverySession,
   initialAuthRedirectHadRecoveryMarker,
@@ -9,18 +9,60 @@ import {
 import "../../styles/cinematic.css";
 
 type RecoveryState = 'verifying' | 'ready' | 'invalid' | 'complete';
+const PASSWORD_UPDATED_RELOAD_KEY = 'luv-password-updated-after-recovery';
+
+function consumePasswordUpdatedReloadMarker() {
+  if (typeof window === 'undefined') return false;
+  try {
+    const wasUpdated = window.sessionStorage.getItem(PASSWORD_UPDATED_RELOAD_KEY) === '1';
+    window.sessionStorage.removeItem(PASSWORD_UPDATED_RELOAD_KEY);
+    return wasUpdated;
+  } catch {
+    return false;
+  }
+}
+
+function reloadWithoutRecoveryCredentials(afterPasswordUpdate = false) {
+  clearPasswordRecoverySession();
+  if (afterPasswordUpdate) {
+    try {
+      window.sessionStorage.setItem(PASSWORD_UPDATED_RELOAD_KEY, '1');
+    } catch {
+      // The clean reload still destroys the memory-only recovery session.
+    }
+  }
+  window.location.replace('/reset');
+}
 
 export default function ResetPassword() {
+  const reduceMotion = useReducedMotion();
+  const [completedAfterReload] = useState(consumePasswordUpdatedReloadMarker);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [recoveryState, setRecoveryState] = useState<RecoveryState>(
-    initialAuthRedirectHadRecoveryMarker ? 'verifying' : 'invalid'
+    completedAfterReload
+      ? 'complete'
+      : initialAuthRedirectHadRecoveryMarker
+        ? 'verifying'
+        : 'invalid'
   );
+  const statePanelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (completedAfterReload) {
+      setMessage('Password updated. This browser no longer holds the recovery session. You can now sign in with your new password in the Luv app.');
+    }
+  }, [completedAfterReload]);
+
+  useEffect(() => {
+    if (recoveryState !== 'ready') statePanelRef.current?.focus();
+  }, [recoveryState]);
+
+  useEffect(() => {
+    if (completedAfterReload) return;
     if (!initialAuthRedirectHadRecoveryMarker) {
       setRecoveryState('invalid');
       return;
@@ -31,8 +73,7 @@ export default function ResetPassword() {
     let verificationTimer = window.setTimeout(() => {
       if (active && !verificationFinished) {
         verificationFinished = true;
-        clearPasswordRecoverySession();
-        setRecoveryState('invalid');
+        reloadWithoutRecoveryCredentials();
       }
     }, 8000);
 
@@ -43,8 +84,7 @@ export default function ResetPassword() {
       if (userError || !data.user || data.user.id !== expectedUserID) {
         verificationFinished = true;
         window.clearTimeout(verificationTimer);
-        clearPasswordRecoverySession();
-        setRecoveryState('invalid');
+        reloadWithoutRecoveryCredentials();
         return;
       }
 
@@ -53,7 +93,6 @@ export default function ResetPassword() {
       // returns to the expired/invalid state.
       verificationFinished = true;
       window.clearTimeout(verificationTimer);
-      window.history.replaceState({}, document.title, '/reset');
       setRecoveryState('ready');
     }
 
@@ -63,8 +102,7 @@ export default function ResetPassword() {
       if (!session?.user?.id) {
         verificationFinished = true;
         window.clearTimeout(verificationTimer);
-        clearPasswordRecoverySession();
-        setRecoveryState('invalid');
+        reloadWithoutRecoveryCredentials();
         return;
       }
 
@@ -77,8 +115,9 @@ export default function ResetPassword() {
       active = false;
       window.clearTimeout(verificationTimer);
       unsubscribe();
+      clearPasswordRecoverySession();
     };
-  }, []);
+  }, [completedAfterReload]);
 
   const handleReset = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -90,8 +129,8 @@ export default function ResetPassword() {
       return;
     }
 
-    if (password.length < 8 || !/[A-Za-z]/.test(password) || !/\d/.test(password)) {
-      setError('Use at least 8 characters with at least one letter and one number.');
+    if (password.trim().length < 8) {
+      setError('Use at least 8 characters.');
       return;
     }
 
@@ -108,7 +147,10 @@ export default function ResetPassword() {
       });
 
       if (updateError) {
-        setError(updateError.message);
+        // A failed response can arrive after the server committed the change.
+        // Destroy the one-shot recovery session instead of allowing a replay
+        // whose outcome is unknowable from this browser.
+        reloadWithoutRecoveryCredentials();
         return;
       }
 
@@ -116,19 +158,26 @@ export default function ResetPassword() {
       clearPasswordRecoverySession();
       setPassword('');
       setConfirmPassword('');
+      if (signOutError) {
+        // A non-auth server failure can make supabase-js return before removing
+        // its in-memory session. A hard reload deterministically destroys this
+        // nonpersistent client while preserving only a one-shot success notice.
+        reloadWithoutRecoveryCredentials(true);
+        return;
+      }
       setRecoveryState('complete');
-      setMessage(signOutError
-        ? 'Password updated. Close this browser tab, then sign in with your new password in the Luv app.'
-        : 'Password updated and this recovery session was closed. You can now sign in with your new password in the Luv app.');
+      setMessage('Password updated and this recovery session was closed. You can now sign in with your new password in the Luv app.');
     } catch {
-      setError('We could not update your password. Request a fresh recovery link and try again.');
+      // Network loss is ambiguous: the server may already have accepted the
+      // password. A clean reload prevents a second update with the same token.
+      reloadWithoutRecoveryCredentials();
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="cinematic-theme relative min-h-screen flex items-center justify-center overflow-hidden px-5 py-16">
+    <main className="cinematic-theme relative min-h-screen flex items-center justify-center overflow-hidden px-5 py-16">
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -136,9 +185,9 @@ export default function ResetPassword() {
       />
 
       <motion.div
-        initial={{ opacity: 0, y: 18 }}
+        initial={reduceMotion ? false : { opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+        transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.25, 1, 0.5, 1] }}
         className="relative w-full max-w-[400px]"
       >
         <div className="text-center mb-9">
@@ -151,21 +200,22 @@ export default function ResetPassword() {
 
         <div className="surface-panel rounded-[1.6rem] p-7">
           {recoveryState === 'complete' ? (
-            <div className="text-center py-4">
-              <div className="text-[30px] mb-3">💌</div>
+            <div ref={statePanelRef} tabIndex={-1} role="status" aria-live="polite" className="text-center py-4 focus:outline-none">
+              <div className="text-[30px] mb-3" aria-hidden="true">💌</div>
               <p className="text-[#fbf1c7] font-medium text-[14.5px] leading-relaxed">{message}</p>
             </div>
           ) : recoveryState === 'verifying' ? (
-            <div className="flex flex-col items-center py-8">
+            <div ref={statePanelRef} tabIndex={-1} role="status" aria-live="polite" className="flex flex-col items-center py-8 focus:outline-none">
               <div
+                aria-hidden="true"
                 className="mb-4 rounded-full"
-                style={{ width: '28px', height: '28px', border: '2px solid #d3869b', borderTopColor: 'transparent', animation: 'spin 0.8s linear infinite' }}
+                style={{ width: '28px', height: '28px', border: '2px solid #d3869b', borderTopColor: 'transparent', animation: reduceMotion ? 'none' : 'spin 0.8s linear infinite' }}
               />
               <p className="text-[14px] text-[#a89984] m-0">Verifying reset link…</p>
               <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
             </div>
           ) : recoveryState === 'invalid' ? (
-            <div className="text-center py-4" role="alert">
+            <div ref={statePanelRef} tabIndex={-1} className="text-center py-4 focus:outline-none" role="alert">
               <div className="text-[30px] mb-3" aria-hidden="true">⌛</div>
               <h2 className="text-[#fbf1c7] font-semibold text-[17px] mb-2">This reset link is not active</h2>
               <p className="text-[#a89984] text-[13.5px] leading-relaxed mb-6">
@@ -192,12 +242,16 @@ export default function ResetPassword() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="8+ characters, letter + number"
+                  placeholder="8+ characters"
                   minLength={8}
+                  aria-describedby="reset-password-hint"
                   autoComplete="new-password"
                   required
                   className="surface-input w-full rounded-xl px-4 py-3.5 text-[15px] text-[#fbf1c7] placeholder:text-[#ebdbb2]/25"
                 />
+                <p id="reset-password-hint" className="mt-2 text-xs leading-relaxed text-[#928374]">
+                  Use at least 8 characters. Spaces inside the password are allowed.
+                </p>
               </div>
 
               <div className="mb-6">
@@ -234,6 +288,6 @@ export default function ResetPassword() {
           </a>
         </p>
       </motion.div>
-    </div>
+    </main>
   );
 }

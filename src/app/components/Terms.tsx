@@ -1,10 +1,11 @@
 import "../../styles/cinematic.css";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { FileCheck, Shield, CreditCard, Ban } from "lucide-react";
 import { PageNav } from "./PageNav";
 import { AnimatedSection } from "./AnimatedSection";
 
 export function Terms() {
+  const reduceMotion = useReducedMotion();
   const tldrCards = [
     { icon: <FileCheck className="w-5 h-5" />, title: "Plain Language", desc: "These terms explain the service, purchases, and your responsibilities" },
     { icon: <Shield className="w-5 h-5" />, title: "Age 13+", desc: "You must be at least 13 years old to use Luv" },
@@ -27,7 +28,7 @@ export function Terms() {
       title: "Description of Service",
       content: (
         <p className="text-[#a89984] leading-relaxed">
-          Luv lets one connected pair exchange notes that are stored by the service and displayed in the app and supported iPhone widgets. The service also includes profiles, relationship activity, optional scheduled notes, and Premium features. Widget and background delivery depend on Apple systems, device settings, connectivity, and service availability and may not occur immediately.
+          Luv lets one connected pair exchange notes that are stored by the service and displayed in the app and supported Apple-device widgets. The service also includes profiles, relationship activity, optional scheduled notes, and Premium features. Widget and background delivery depend on Apple systems, device settings, connectivity, and service availability and may not occur immediately.
         </p>
       ),
     },
@@ -165,11 +166,11 @@ export function Terms() {
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
+    <motion.main
+      initial={reduceMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: reduceMotion ? 0 : 0.3 }}
       className="cinematic-theme min-h-screen relative overflow-hidden"
     >
       <div className="fixed inset-0 z-0 bg-[#1f1b18]" />
@@ -186,9 +187,9 @@ export function Terms() {
           />
           <div className="max-w-[900px] mx-auto relative">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: reduceMotion ? 0 : 0.6 }}
               className="text-center"
             >
               <div className="mb-8">
@@ -210,17 +211,17 @@ export function Terms() {
               {tldrCards.map((card, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={reduceMotion ? false : { opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.5, delay: 0.12 * i }}
+                  transition={{ duration: reduceMotion ? 0 : 0.5, delay: reduceMotion ? 0 : 0.12 * i }}
                   className="surface-panel surface-panel-hover rounded-3xl p-7"
                 >
                   <div className="text-[#d3869b] mb-5 relative w-fit">
                     <div className="absolute -inset-2 bg-[#d3869b]/15 rounded-full blur-md" />
                     <div className="relative">{card.icon}</div>
                   </div>
-                  <h3 className="text-sm text-[#fbf1c7] font-semibold tracking-tight mb-2">{card.title}</h3>
+                  <p className="text-sm text-[#fbf1c7] font-semibold tracking-tight mb-2">{card.title}</p>
                   <p className="text-xs text-[#a89984] leading-relaxed">{card.desc}</p>
                 </motion.div>
               ))}
@@ -259,6 +260,6 @@ export function Terms() {
           </div>
         </section>
       </div>
-    </motion.div>
+    </motion.main>
   );
 }

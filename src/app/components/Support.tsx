@@ -1,30 +1,31 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { Mail, Bug, ChevronDown } from "lucide-react";
 import { AnimatedSection } from "./AnimatedSection";
 import "../../styles/cinematic.css";
 
 export function Support() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const reduceMotion = useReducedMotion();
 
   const faqs = [
     { question: "How do I connect with my partner?", answer: "Both people need a Luv account. One person shares the connection code or invite link shown by the app, and the other accepts it in Luv. Each account can have one active partner connection at a time." },
-    { question: "Why isn't the widget updating?", answer: "First confirm the new note appears inside Luv. Then open Luv on both phones, check that notifications are allowed, and confirm the Luv widget is still installed. iOS schedules background and widget refreshes, so an update may be delayed—especially after force-quitting the app or losing connectivity. If it remains stale, remove and re-add the widget and email us with your iOS version, Luv version, and whether the note appears in the app." },
+    { question: "Why isn't the widget updating?", answer: "First confirm the new note appears inside Luv. Then open Luv on both devices, make sure Background App Refresh is enabled for Luv, and confirm the Luv widget is still installed. Visible notification permission is not required for a silent widget-refresh request. Apple schedules background and widget refreshes, so an update may be delayed—especially after force-quitting the app or losing connectivity. If it remains stale, remove and re-add the widget and email us with your OS version, Luv version, and whether the note appears in the app." },
     { question: "Can I use Luv with multiple partners?", answer: "Luv currently supports one active partner connection per account. You must leave the existing connection before connecting with someone else." },
     { question: "How are my notes protected?", answer: "Luv encrypts data while it travels over the network and stores notes in Supabase so they can be delivered to your connected partner. Notes are not end-to-end encrypted, which means Luv's backend and authorized service providers can technically process stored note content. See the Privacy Policy for the full details." },
-    { question: "How do I manage or restore a purchase?", answer: "If Apple shows an active Luv subscription, manage or cancel it from iPhone Settings → [Your Name] → Subscriptions. For an eligible purchase, use Restore Purchases inside Luv while signed in to the Luv account that should receive access and the Apple Account that owns the purchase. Premium appears only after Apple and Luv confirm the purchase and account association. If a restore stays pending, contact support. Apple handles App Store refund requests." },
-    { question: "What iOS version do I need?", answer: "Luv requires iOS 18.5 or later to support home screen widgets and the latest notification features." },
-    { question: "Where can I add the widget?", answer: "Luv supports small and medium Home Screen widgets and a rectangular Lock Screen widget. Add widgets through iOS's widget editor after opening Luv at least once." },
+    { question: "How do I manage or restore a purchase?", answer: "If Apple shows an active Luv subscription, manage or cancel it from Settings → [Your Name] → Subscriptions on your Apple device. For an eligible purchase, use Restore Purchases inside Luv while signed in to the Luv account that should receive access and the Apple Account that owns the purchase. Premium appears only after Apple and Luv confirm the purchase and account association. If a restore stays pending, contact support. Apple handles App Store refund requests." },
+    { question: "What system version do I need?", answer: "Luv requires iOS or iPadOS 18.5 or later to support its widgets and background refresh features." },
+    { question: "Where can I add the widget?", answer: "Luv supports small and medium Home Screen widgets and a rectangular Lock Screen widget. Add widgets through the iOS or iPadOS widget editor after opening Luv at least once." },
     { question: "What happens if I delete the app or my account?", answer: "Deleting the app does not delete your Luv account or stored notes. To request account deletion, use Delete Account in Luv Settings. Processing is asynchronous, so wait for the app to confirm completion. If the request is unavailable, delayed, or you cannot access the app, email privacy@luvnote.app." },
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
+    <motion.main
+      initial={reduceMotion ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: reduceMotion ? 0 : 0.3 }}
       className="cinematic-theme min-h-screen relative overflow-hidden"
     >
       {/* Base + texture layers */}
@@ -34,21 +35,25 @@ export function Support() {
 
       {/* Nav — text wordmark, no gif */}
       <motion.nav
-        initial={{ opacity: 0, y: -8 }}
+        aria-label="Primary"
+        initial={reduceMotion ? false : { opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-        className="fixed top-0 left-0 right-0 z-50"
+        transition={{ duration: reduceMotion ? 0 : 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+        className="fixed top-0 left-0 right-0 z-50 border-b border-[#ebdbb2]/[0.06] bg-[#1f1b18]/92 backdrop-blur-xl"
       >
         <div className="max-w-[1200px] mx-auto px-6 py-5">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-2 group">
+            <Link
+              to="/"
+              className="flex items-center gap-2 rounded-sm group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d3869b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1f1b18]"
+            >
               <span className="font-mono text-xl lowercase tracking-tight text-[#fbf1c7] group-hover:text-[#d3869b] transition-colors">
                 luv
               </span>
             </Link>
             <Link
               to="/"
-              className="relative font-mono text-[11px] uppercase tracking-wide text-[#928374] hover:text-[#ebdbb2] transition-colors group"
+              className="relative rounded-sm font-mono text-[11px] uppercase tracking-wide text-[#928374] hover:text-[#ebdbb2] transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d3869b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1f1b18]"
             >
               ← luv
               <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-[#d3869b] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
@@ -71,9 +76,9 @@ export function Support() {
           />
           <div className="max-w-[900px] mx-auto relative">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: reduceMotion ? 0 : 0.6 }}
               className="text-center"
             >
               <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#ebdbb2]/45 mb-6">
@@ -106,7 +111,7 @@ export function Support() {
               <AnimatedSection delay={0.1}>
                 <a
                   href="mailto:support@luvnote.app"
-                  className="surface-panel block rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#d3869b]/30 group"
+                  className="surface-panel block rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#d3869b]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d3869b] focus-visible:ring-offset-4 focus-visible:ring-offset-[#1f1b18] group"
                 >
                   <div className="mb-6 w-fit">
                     <div className="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-[#d3869b]/12 border border-[#d3869b]/20">
@@ -126,7 +131,7 @@ export function Support() {
               <AnimatedSection delay={0.15}>
                 <a
                   href="mailto:bug@luvnote.app"
-                  className="surface-panel block rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#d3869b]/30 group"
+                  className="surface-panel block rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#d3869b]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d3869b] focus-visible:ring-offset-4 focus-visible:ring-offset-[#1f1b18] group"
                 >
                   <div className="mb-6 w-fit">
                     <div className="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-[#d3869b]/12 border border-[#d3869b]/20">
@@ -164,21 +169,34 @@ export function Support() {
                       onClick={() => setOpenFaq(openFaq === index ? null : index)}
                       aria-expanded={openFaq === index}
                       aria-controls={`support-faq-panel-${index}`}
-                      className="w-full flex items-center justify-between py-6 text-left cursor-pointer group"
+                      className="w-full flex items-center justify-between py-6 text-left cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d3869b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1f1b18] group"
                     >
                       <span className="text-base text-[#ebdbb2] font-medium tracking-tight pr-4 group-hover:text-[#fbf1c7] transition-colors">
                         {faq.question}
                       </span>
                       <motion.div
                         animate={{ rotate: openFaq === index ? 180 : 0 }}
-                        transition={{ duration: 0.25, ease: "easeInOut" }}
+                        transition={{ duration: reduceMotion ? 0 : 0.25, ease: "easeInOut" }}
                         className="flex-shrink-0"
                       >
                         <ChevronDown className="w-4 h-4 text-[#928374] group-hover:text-[#d3869b] transition-colors" />
                       </motion.div>
                     </button>
-                    <AnimatePresence initial={false}>
-                      {openFaq === index && (
+                    {reduceMotion ? (
+                      openFaq === index && (
+                        <div
+                          id={`support-faq-panel-${index}`}
+                          role="region"
+                          aria-labelledby={`support-faq-button-${index}`}
+                        >
+                          <p className="text-sm text-[#a89984] leading-relaxed pb-6">
+                            {faq.answer}
+                          </p>
+                        </div>
+                      )
+                    ) : (
+                      <AnimatePresence initial={false}>
+                        {openFaq === index && (
                         <motion.div
                           id={`support-faq-panel-${index}`}
                           role="region"
@@ -199,8 +217,9 @@ export function Support() {
                             {faq.answer}
                           </motion.p>
                         </motion.div>
-                      )}
-                    </AnimatePresence>
+                        )}
+                      </AnimatePresence>
+                    )}
                   </div>
                 </AnimatedSection>
               ))}
@@ -217,6 +236,6 @@ export function Support() {
           </div>
         </section>
       </div>
-    </motion.div>
+    </motion.main>
   );
 }

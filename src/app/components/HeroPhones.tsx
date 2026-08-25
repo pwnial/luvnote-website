@@ -9,7 +9,7 @@ import { Heart, Battery, Signal, Wifi, Send } from "lucide-react";
 const DIGIT_H = 52;
 const DIGIT_W = DIGIT_H * 0.55;
 
-function RollingDigit({ value, isColon }: { value: number; isColon?: boolean }) {
+function RollingDigit({ value = 0, isColon }: { value?: number; isColon?: boolean }) {
   if (isColon) {
     return (
       <div

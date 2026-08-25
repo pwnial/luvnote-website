@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { motion } from "motion/react";
 import { Copy, Check } from "lucide-react";
 import "../../styles/cinematic.css";
@@ -14,13 +14,14 @@ function normalizedInviteCode(raw: string | null | undefined) {
 
 export function Connect() {
   const { code: pathCode } = useParams<{ code?: string }>();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const queryEntries = Array.from(searchParams.entries());
   const isPathInvite = pathCode !== undefined;
-  const hasValidInviteShape = isPathInvite
+  const hasValidInviteShape = location.hash.length === 0 && (isPathInvite
     ? queryEntries.length === 0
     : queryEntries.length === 0
-      || (queryEntries.length === 1 && queryEntries[0][0] === "code");
+      || (queryEntries.length === 1 && queryEntries[0][0] === "code"));
   const rawCode = pathCode ?? (queryEntries.length === 1 && queryEntries[0][0] === "code" ? queryEntries[0][1] : "");
   const code = normalizedInviteCode(rawCode);
   const hasInvalidCode = !hasValidInviteShape || (rawCode.trim().length > 0 && code === null);
@@ -51,13 +52,8 @@ export function Connect() {
     }
   }
 
-  function manualOpenApp() {
-    if (!code) return;
-    window.location.href = `luv://connect?code=${encodeURIComponent(code)}`;
-  }
-
   return (
-    <motion.div
+    <motion.main
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -142,16 +138,16 @@ export function Connect() {
           )}
 
           {code && (
-            <motion.button
+            <motion.a
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              onClick={manualOpenApp}
-              className="btn-modern-light w-full mb-4 px-8 py-4 rounded-[1.25rem] text-[15px] font-semibold"
+              href={`luv://connect?code=${encodeURIComponent(code)}`}
+              className="btn-modern-light mb-4 flex w-full items-center justify-center rounded-[1.25rem] px-8 py-4 text-[15px] font-semibold"
             >
               Open in luv app
-            </motion.button>
+            </motion.a>
           )}
 
           {/* App Store is an explicit choice. Invite codes survive visually on
@@ -197,6 +193,6 @@ export function Connect() {
           </div>
         </motion.div>
       </div>
-    </motion.div>
+    </motion.main>
   );
 }

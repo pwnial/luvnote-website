@@ -15,6 +15,13 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* Every interactive control needs a visible keyboard focus indicator. Keep it
+   at the shared theme boundary so new legal/support links cannot regress. */
+.cinematic-theme :where(a, button):focus-visible {
+  outline: 2px solid #d3869b !important;
+  outline-offset: 4px !important;
+}
+
 /* Foil / depth text -------------------------------------------------------- */
 .text-3d-matte {
   color: #fbf1c7;

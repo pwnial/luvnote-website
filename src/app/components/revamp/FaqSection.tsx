@@ -5,7 +5,7 @@ import { HelpCircle, Plus } from "lucide-react";
 const FAQS = [
   {
     q: "How does the widget update work?",
-    a: "Luv stores the note, then requests a silent background refresh on your partner's iPhone. Apple and iOS control background delivery and widget scheduling, so the update may be delayed until the app or widget refreshes.",
+    a: "Luv stores the note, then requests a silent background refresh on your partner's supported Apple device. Apple controls background delivery and widget scheduling, so the update may be delayed until the app or widget refreshes.",
   },
   {
     q: "How are notes protected?",
@@ -13,7 +13,7 @@ const FAQS = [
   },
   {
     q: "Does it work with Android?",
-    a: "No. Luv currently requires an iPhone running iOS 18.5 or later.",
+    a: "No. Luv currently requires an Apple device running iOS or iPadOS 18.5 or later.",
   },
   {
     q: "How much does it cost?",
