@@ -7,9 +7,9 @@ import { AnimatedSection } from "./AnimatedSection";
 export function Privacy() {
   const tldrCards = [
     { icon: <Shield className="w-5 h-5" />, title: "Stored for Delivery", desc: "Notes are encrypted in transit and stored by Luv; they are not end-to-end encrypted" },
-    { icon: <EyeOff className="w-5 h-5" />, title: "Not Sold", desc: "We do not sell or rent your personal information" },
+    { icon: <EyeOff className="w-5 h-5" />, title: "No Data-Broker Sale", desc: "We do not sell personal information for money; Meta attribution may count as sharing under some laws" },
     { icon: <UserCheck className="w-5 h-5" />, title: "Deletion Requests", desc: "Deletion is asynchronous, and the app reports when processing is complete" },
-    { icon: <Server className="w-5 h-5" />, title: "Service Providers", desc: "Supabase, Apple, PostHog, and Meta help operate and measure Luv" },
+    { icon: <Server className="w-5 h-5" />, title: "Service Providers", desc: "Supabase, Apple, PostHog, Meta, and Vercel help operate Luv and luvnote.app" },
   ];
 
   const sections = [
@@ -20,9 +20,10 @@ export function Privacy() {
         <>
           <p className="text-[#a89984] mb-4 leading-relaxed"><span className="text-[#ebdbb2]">Account and profile data.</span> When you create an account, we collect your email address, display name, account identifier, and authentication records. If you add a profile photo, we store the image and its delivery URL.</p>
           <p className="text-[#a89984] mb-4 leading-relaxed"><span className="text-[#ebdbb2]">Relationship and content data.</span> We store connection codes, partner relationships, notes and scheduled notes, delivery and creation timestamps, and relationship activity such as streak or note totals so the app can provide its features.</p>
-          <p className="text-[#a89984] mb-4 leading-relaxed"><span className="text-[#ebdbb2]">Device and service data.</span> We process Apple push-notification tokens, app-generated device, session, and widget credentials, app and build versions, and limited diagnostic categories. Meta's SDK may also collect device, advertising, crash, and other technical data as described in section 06.</p>
+          <p className="text-[#a89984] mb-4 leading-relaxed"><span className="text-[#ebdbb2]">Device and service data.</span> We process Apple push-notification tokens and app-generated device, session, and widget credentials. After sign-in, Luv may store a coarse, allowlisted diagnostic category and feature context together with your account ID, app version, build number, and time. That Luv diagnostic record does not contain exception text or an arbitrary developer message. Separately, Meta's SDK may collect device, advertising, crash, and other technical data as described in section 06.</p>
           <p className="text-[#a89984] mb-4 leading-relaxed"><span className="text-[#ebdbb2]">Purchase data.</span> For Premium, we process Apple product and transaction identifiers, subscription or purchase status, expiration or revocation information, purchase environment, and an app-account token used to associate Apple's result with your Luv account. Apple processes your payment details; Luv does not receive your full card number.</p>
-          <p className="text-[#a89984] leading-relaxed"><span className="text-[#ebdbb2]">Product analytics.</span> PostHog receives events such as app opens, onboarding steps, partner connections, widget setup actions, paywall activity, and purchase outcomes. Before sign-in, events use a randomly generated analytics identifier; after sign-in, events use your Luv account ID and may be joined with earlier anonymous events. Luv's event properties are designed not to include note text, email address, display name, profile photo, or partner details.</p>
+          <p className="text-[#a89984] mb-4 leading-relaxed"><span className="text-[#ebdbb2]">Product analytics.</span> PostHog receives events such as app opens, onboarding steps, partner connections, widget setup actions, paywall activity, and purchase outcomes. Before sign-in, events use a randomly generated analytics identifier; after sign-in, events use your Luv account ID and may be joined with earlier anonymous events. Luv's event properties are designed not to include note text, email address, display name, profile photo, or partner details.</p>
+          <p className="text-[#a89984] leading-relaxed"><span className="text-[#ebdbb2]">Website and hosting data.</span> When you visit luvnote.app, Vercel and ordinary web infrastructure may process your IP address, requested page, date and time, browser or device information, referrer, and technical request or security logs needed to deliver and protect the website. Luv does not currently run a separate product-analytics tracker on the public website.</p>
         </>
       ),
     },
@@ -51,7 +52,7 @@ export function Privacy() {
       title: "Data Sharing",
       content: (
         <p className="text-[#a89984] leading-relaxed">
-          We do not sell or rent your personal information. We disclose data to your <span className="text-[#ebdbb2]">connected partner</span> as the product requires; to <span className="text-[#ebdbb2]">Supabase, Apple, PostHog, and Meta</span> for the purposes described here; when required by law or needed to protect rights, safety, and the service; and as part of a merger, financing, acquisition, or sale of assets, subject to applicable law.
+          We do not sell personal information for money or rent it to data brokers. We disclose data to your <span className="text-[#ebdbb2]">connected partner</span> as the product requires; to <span className="text-[#ebdbb2]">Supabase, Apple, PostHog, Meta, and Vercel</span> for the purposes described here; when required by law or needed to protect rights, safety, and the service; and as part of a merger, financing, acquisition, or sale of assets, subject to applicable law. Depending on where you live, Meta advertising attribution may be treated as “sharing,” targeted advertising, or a similar regulated activity even when no money changes hands. You can deny or later disable Apple tracking permission as described below.
         </p>
       ),
     },
@@ -72,12 +73,14 @@ export function Privacy() {
           <p className="text-[#a89984] mb-3 leading-relaxed"><span className="text-[#ebdbb2]">Supabase</span> provides authentication, database, storage, and backend functions. <span className="text-[#ebdbb2]">Apple</span> provides Sign in with Apple, push notifications, App Tracking Transparency, and App Store purchases.</p>
           <p className="text-[#a89984] mb-3 leading-relaxed"><span className="text-[#ebdbb2]">PostHog</span> receives the product-analytics events described in section 01. We use its hosted service to understand adoption, reliability, and conversion.</p>
           <p className="text-[#a89984] mb-3 leading-relaxed"><span className="text-[#ebdbb2]">Meta</span> provides advertising and install-attribution technology through the Meta SDK. The SDK may receive install, app-open, purchase-related, device, advertising, crash, and technical event data. If Apple presents the App Tracking Transparency prompt and you authorize tracking, Meta may access your Advertising Identifier (IDFA) for attribution. If you do not authorize tracking, iOS prevents IDFA access, although Meta may still process limited event and technical data that does not use the IDFA. Luv does not intentionally add note text, names, email addresses, profile photos, or partner details to Meta events.</p>
+          <p className="text-[#a89984] mb-3 leading-relaxed"><span className="text-[#ebdbb2]">Vercel</span> hosts luvnote.app and may process the website request and security-log data described in section 01 to deliver and protect the site.</p>
           <p className="text-[#a89984] mb-3 leading-relaxed">Tracking permission can be changed in <span className="text-[#ebdbb2]">iOS Settings → Privacy &amp; Security → Tracking → luv</span>. Denying tracking does not disable Luv's core messaging features.</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-[#928374]">
             <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#d3869b] hover:underline">supabase.com/privacy</a>
             <a href="https://www.apple.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#d3869b] hover:underline">apple.com/privacy</a>
             <a href="https://posthog.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#d3869b] hover:underline">posthog.com/privacy</a>
             <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer" className="text-[#d3869b] hover:underline">meta.com/privacy</a>
+            <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#d3869b] hover:underline">vercel.com/privacy</a>
           </div>
         </>
       ),
@@ -115,12 +118,21 @@ export function Privacy() {
       title: "International Transfers",
       content: (
         <p className="text-[#a89984] leading-relaxed">
-          Our service providers may process information in the United States and other countries. Privacy protections in those places may differ from those where you live. We use provider contracts and other measures required by applicable law for these transfers.
+          Our service providers may process information in the United States and other countries. Privacy protections in those places may differ from those where you live. Their linked privacy materials describe their processing and transfer practices. Contact us if you have a question about where your information is handled.
         </p>
       ),
     },
     {
       num: "11",
+      title: "Scope, Operator & Contact",
+      content: (
+        <p className="text-[#a89984] leading-relaxed">
+          This policy covers the Luv iOS app and luvnote.app. Privacy and data-rights requests are handled by the independent developer operating Luv at <a href="mailto:privacy@luvnote.app" className="text-[#d3869b] hover:underline">privacy@luvnote.app</a>, and general support requests can be sent to <a href="mailto:support@luvnote.app" className="text-[#d3869b] hover:underline">support@luvnote.app</a>.
+        </p>
+      ),
+    },
+    {
+      num: "12",
       title: "Changes to This Policy",
       content: (
         <p className="text-[#a89984] leading-relaxed">
@@ -164,7 +176,7 @@ export function Privacy() {
               <p className="font-mono text-[11px] text-[#928374] uppercase tracking-[0.25em] mb-6">Last updated August 25, 2026</p>
               <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 text-silver-matte">Privacy Policy</h1>
               <p className="text-lg text-[#ebdbb2]/70 max-w-lg mx-auto leading-relaxed">
-                Your data, your control. Here's exactly what we do — and don't do.
+                How the Luv app and luvnote.app handle information.
               </p>
             </motion.div>
           </div>

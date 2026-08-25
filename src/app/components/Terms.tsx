@@ -8,7 +8,7 @@ export function Terms() {
   const tldrCards = [
     { icon: <FileCheck className="w-5 h-5" />, title: "Plain Language", desc: "These terms explain the service, purchases, and your responsibilities" },
     { icon: <Shield className="w-5 h-5" />, title: "Age 13+", desc: "You must be at least 13 years old to use Luv" },
-    { icon: <CreditCard className="w-5 h-5" />, title: "App Store Purchases", desc: "Apple processes Weekly, Monthly, and Lifetime purchases" },
+    { icon: <CreditCard className="w-5 h-5" />, title: "App Store Purchases", desc: "Apple shows and processes the Premium products currently available to you" },
     { icon: <Ban className="w-5 h-5" />, title: "Respectful Use", desc: "Harassment, abuse, and illegal content are not allowed" },
   ];
 
@@ -82,9 +82,10 @@ export function Terms() {
       title: "Subscriptions & Billing",
       content: (
         <>
-          <p className="text-[#a89984] mb-4 leading-relaxed"><span className="text-[#ebdbb2]">Weekly and Monthly</span> are auto-renewing subscriptions. Payment is charged to your Apple Account when Apple confirms the purchase. Unless you turn off auto-renewal at least 24 hours before the current period ends, Apple may renew and charge the subscription for the next period. You can manage or cancel it in your Apple Account subscription settings. Cancellation stops future renewal but normally leaves access available through the already-paid period.</p>
+          <p className="text-[#a89984] mb-4 leading-relaxed">Luv may offer <span className="text-[#ebdbb2]">Weekly or Monthly</span> auto-renewing subscriptions. A product is available only when it appears in Luv and Apple's purchase sheet. Payment is charged to your Apple Account when Apple confirms the purchase. Unless you turn off auto-renewal at least 24 hours before the current period ends, Apple may renew and charge the subscription for the next period. You can manage or cancel it in your Apple Account subscription settings. Cancellation stops future renewal but normally leaves access available through the already-paid period.</p>
           <p className="text-[#a89984] mb-4 leading-relaxed">A free trial may be offered for an eligible product or account. Eligibility, trial length, price, billing period, and any required consent are shown by Luv and Apple before purchase; the terms displayed at checkout control.</p>
-          <p className="text-[#a89984] mb-4 leading-relaxed"><span className="text-[#ebdbb2]">Lifetime</span> is a one-time, non-consumable purchase and does not auto-renew. It provides Premium access for the duration Luv offers the applicable Premium service; it is not a promise that the app or every feature will exist forever. Purchases may be restorable through the Apple Account that owns them.</p>
+          <p className="text-[#a89984] mb-4 leading-relaxed">If offered, <span className="text-[#ebdbb2]">Lifetime</span> is a one-time, non-consumable purchase and does not auto-renew. It provides Premium access for the duration Luv offers the applicable Premium service; it is not a promise that the app or every feature will exist forever.</p>
+          <p className="text-[#a89984] mb-4 leading-relaxed">Restore Purchases asks Apple for eligible purchases, then Luv must confirm the purchase and account association before Premium access is shown. A restore may remain pending or require support if Apple or Luv cannot safely confirm ownership; it is not guaranteed merely because a product once appeared in purchase history.</p>
           <p className="text-[#a89984] leading-relaxed">The price shown in the App Store purchase sheet before confirmation is the price that applies, including any local currency and taxes Apple displays. Apple processes billing and decides refund requests. Luv cannot issue an App Store refund directly. If Apple refunds, revokes, or reverses a purchase, the related Premium access may end. You can <a href="https://support.apple.com/billing" target="_blank" rel="noopener noreferrer" className="text-[#d3869b] hover:underline">manage billing with Apple</a> or <a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener noreferrer" className="text-[#d3869b] hover:underline">request a refund from Apple</a>.</p>
         </>
       ),
@@ -148,7 +149,7 @@ export function Terms() {
       title: "Changes & Termination",
       content: (
         <p className="text-[#a89984] leading-relaxed">
-          We may modify these terms at any time. We'll notify you of material changes. Continued use constitutes acceptance. We may terminate access without notice for breach of these terms.
+          We may modify these terms from time to time. We will post the revised terms here and update the date above. If applicable law or an Apple purchase flow requires an additional notice or consent, we will provide it through the required channel. Continued use after revised terms take effect constitutes acceptance where permitted by law. We may terminate access for a breach of these terms.
         </p>
       ),
     },

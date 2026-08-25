@@ -207,7 +207,7 @@ export function HowItWorksFilm() {
   );
 
   return (
-    <div ref={root} className="relative w-screen h-screen overflow-hidden bg-[#1f1b18] text-[#fbf1c7]" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div ref={root} className="relative w-screen h-screen overflow-hidden bg-[#1f1b18] text-[#fbf1c7]" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
       <style dangerouslySetInnerHTML={{ __html: STYLES }} />
       <div className="film-grain absolute inset-0 z-50 pointer-events-none" aria-hidden />
       <div className="scroll-hint fixed bottom-7 left-1/2 -translate-x-1/2 z-[60] flex flex-col items-center gap-2 pointer-events-none">

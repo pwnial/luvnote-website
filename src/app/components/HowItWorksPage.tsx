@@ -5,8 +5,9 @@ import { HowItWorksFilm } from "./revamp/HowItWorksFilm";
 export function HowItWorksPage() {
   return (
     <div className="cinematic-theme">
+      <h1 className="sr-only">How Luv works</h1>
       <Link
-        to="/cinematic"
+        to="/"
         aria-label="Back to luv"
         className="fixed top-5 left-6 z-[60] font-mono text-sm lowercase text-[#ebdbb2]/55 hover:text-[#fbf1c7] transition-colors"
       >

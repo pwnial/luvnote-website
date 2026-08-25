@@ -279,7 +279,7 @@ export function CinematicHero({
         const counter = containerRef.current?.querySelector(".counter-val");
         if (counter) counter.innerHTML = String(metricValue);
         gsap.set(".cta-wrapper", { autoAlpha: 0 });
-        gsap.set(".scroll-hint", { autoAlpha: 1 });
+        gsap.set(".scroll-hint", { autoAlpha: 0 });
         return;
       }
 
@@ -351,7 +351,7 @@ export function CinematicHero({
       )}
       style={{
         perspective: "1500px",
-        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
         // Override the resolved color tokens directly — @theme inline bakes
         // --color-* at :root, so overriding --foreground alone does nothing.
         ["--color-background" as string]: "#1f1b18",
@@ -363,6 +363,60 @@ export function CinematicHero({
       <style dangerouslySetInnerHTML={{ __html: INJECTED_STYLES }} />
       <div className="film-grain" aria-hidden="true" />
       <div className="bg-grid-theme absolute inset-0 z-0 pointer-events-none opacity-50" aria-hidden="true" />
+
+      {/* Always-available navigation. It stays outside the cinematic timeline so
+          Reduce Motion, keyboard users, and first-time visitors never lose the
+          primary actions or the public legal/support pages. */}
+      <nav
+        aria-label="Primary"
+        className="fixed inset-x-0 top-0 z-[90] px-4 py-4 sm:px-6 pointer-events-none"
+      >
+        <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4">
+          <Link
+            to="/"
+            aria-label="Luv home"
+            className="pointer-events-auto font-mono text-lg lowercase tracking-tight text-[#fbf1c7] drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)] transition-colors hover:text-[#d3869b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d3869b] focus-visible:ring-offset-4 focus-visible:ring-offset-[#1f1b18]"
+          >
+            {brandName}
+          </Link>
+          <div className="pointer-events-auto flex items-center gap-2 rounded-full border border-[#ebdbb2]/10 bg-[#1f1b18]/78 p-1.5 shadow-[0_16px_38px_-20px_rgba(0,0,0,0.95)] backdrop-blur-xl">
+            <Link
+              to={howItWorksHref}
+              className="hidden rounded-full px-3 py-2 font-mono text-[10px] uppercase tracking-[0.14em] text-[#a89984] transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d3869b] sm:inline-flex"
+            >
+              how it works
+            </Link>
+            <Link
+              to="/support"
+              className="hidden rounded-full px-3 py-2 font-mono text-[10px] uppercase tracking-[0.14em] text-[#a89984] transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d3869b] md:inline-flex"
+            >
+              support
+            </Link>
+            <a
+              href="https://apps.apple.com/app/id6763015481"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Get luv on the App Store"
+              className="rounded-full bg-[#fbf1c7] px-4 py-2 text-[11px] font-semibold text-[#1f1b18] shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d3869b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1f1b18]"
+            >
+              Get luv
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <nav
+        aria-label="Legal and support"
+        className="fixed bottom-4 left-4 z-[90] flex items-center gap-3 rounded-full border border-[#ebdbb2]/10 bg-[#1f1b18]/78 px-4 py-2.5 font-mono text-[9px] uppercase tracking-[0.14em] text-[#928374] shadow-[0_16px_38px_-20px_rgba(0,0,0,0.95)] backdrop-blur-xl sm:left-6"
+      >
+        <Link className="transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:text-[#fbf1c7]" to="/privacy">privacy</Link>
+        <span aria-hidden="true" className="text-[#ebdbb2]/20">·</span>
+        <Link className="transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:text-[#fbf1c7]" to="/terms">terms</Link>
+        <span aria-hidden="true" className="text-[#ebdbb2]/20 md:hidden">·</span>
+        <Link className="transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:text-[#fbf1c7] md:hidden" to="/support">support</Link>
+        <span aria-hidden="true" className="text-[#ebdbb2]/20 sm:hidden">·</span>
+        <Link className="transition-colors hover:text-[#fbf1c7] focus-visible:outline-none focus-visible:text-[#fbf1c7] sm:hidden" to={howItWorksHref}>how it works</Link>
+      </nav>
 
       {/* scroll cue — appears after the intro text, fades on first scroll */}
       <div className="scroll-hint fixed bottom-7 left-1/2 -translate-x-1/2 z-[60] flex flex-col items-center gap-2 pointer-events-none opacity-0">

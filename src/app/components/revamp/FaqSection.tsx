@@ -17,7 +17,7 @@ const FAQS = [
   },
   {
     q: "How much does it cost?",
-    a: "Luv is free to download and includes limited note sending. Premium is offered through Weekly and Monthly subscriptions or a one-time Lifetime purchase, and unlocks unlimited daily notes, shared streaks, and scheduled surprises. Apple shows the exact price and any eligible trial before purchase.",
+    a: "Luv is free to download and includes limited note sending. Optional Premium products and features may be offered; the products currently available to you, exact price, billing period, and any eligible trial appear in Luv and Apple's purchase sheet before you confirm.",
   },
   {
     q: "Can I connect with more than one person?",
@@ -130,6 +130,7 @@ export function FaqSection() {
                 }`}
               >
                 <button
+                  id={`faq-button-${i}`}
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
@@ -154,6 +155,7 @@ export function FaqSection() {
                     <p
                       id={panelId}
                       role="region"
+                      aria-labelledby={`faq-button-${i}`}
                       className="text-[#a89984] text-base md:text-[1.0625rem] leading-relaxed pb-8 pr-12 md:pr-16 max-w-[640px]"
                     >
                       {item.a}
@@ -166,6 +168,7 @@ export function FaqSection() {
                         key="content"
                         id={panelId}
                         role="region"
+                        aria-labelledby={`faq-button-${i}`}
                         initial={{ height: 0, opacity: 0, filter: "blur(6px)" }}
                         animate={{ height: "auto", opacity: 1, filter: "blur(0px)" }}
                         exit={{ height: 0, opacity: 0, filter: "blur(6px)" }}

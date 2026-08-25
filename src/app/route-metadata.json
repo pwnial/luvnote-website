@@ -1,0 +1,56 @@
+{
+  "/": {
+    "title": "Luv — Notes on Their Lock Screen",
+    "description": "Send a quiet love note to your connected person's iPhone widget. Made for one connected pair, with no social feed and no in-app ads.",
+    "canonicalPath": "/",
+    "robots": "index,follow"
+  },
+  "/how-it-works": {
+    "title": "How Luv Works — From Your Note to Their Widget",
+    "description": "See how Luv stores a note and asks iOS to refresh your connected person's widget.",
+    "canonicalPath": "/how-it-works",
+    "robots": "index,follow"
+  },
+  "/privacy": {
+    "title": "Privacy Policy — Luv",
+    "description": "How the Luv iOS app and luvnote.app collect, use, store, and share information.",
+    "canonicalPath": "/privacy",
+    "robots": "index,follow"
+  },
+  "/terms": {
+    "title": "Terms of Service — Luv",
+    "description": "Terms covering the Luv service, acceptable use, and purchases that may be offered through Apple.",
+    "canonicalPath": "/terms",
+    "robots": "index,follow"
+  },
+  "/support": {
+    "title": "Support — Luv",
+    "description": "Get help with Luv accounts, partner connections, widgets, purchases, and account deletion.",
+    "canonicalPath": "/support",
+    "robots": "index,follow"
+  },
+  "/connect": {
+    "title": "Connect on Luv",
+    "description": "Open an invite in Luv or keep its connection code ready while you install the app.",
+    "canonicalPath": "/connect",
+    "robots": "noindex,nofollow"
+  },
+  "/forgot": {
+    "title": "Request a Password Reset — Luv",
+    "description": "Request a secure password-reset email for your Luv account.",
+    "canonicalPath": "/forgot",
+    "robots": "noindex,nofollow"
+  },
+  "/reset": {
+    "title": "Reset Password — Luv",
+    "description": "Choose a new password after Luv verifies your password-recovery link.",
+    "canonicalPath": "/reset",
+    "robots": "noindex,nofollow"
+  },
+  "__not_found__": {
+    "title": "Page Not Found — Luv",
+    "description": "That Luv page could not be found.",
+    "canonicalPath": null,
+    "robots": "noindex,nofollow"
+  }
+}

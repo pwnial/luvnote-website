@@ -1,12 +1,16 @@
 import { lazy, Suspense, useState, useEffect, useRef, useCallback } from "react";
-import { Routes, Route, Link, useLocation } from "react-router-dom";
+import { Routes, Route, Link, Navigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { Heart, Download, ChevronDown, Zap, Lock } from "lucide-react";
 import { PhoneWidget } from "./components/PhoneWidget";
 import { HeroPhones } from "./components/HeroPhones";
 import { AnimatedSection } from "./components/AnimatedSection";
-import { CinematicHero } from "./components/CinematicHero";
+import { RouteMeta } from "./RouteMeta";
+import { NotFound } from "./components/NotFound";
 
+const CinematicHero = lazy(() =>
+  import("./components/CinematicHero").then(({ CinematicHero }) => ({ default: CinematicHero }))
+);
 const Privacy = lazy(() => import("./components/Privacy").then(({ Privacy }) => ({ default: Privacy })));
 const Terms = lazy(() => import("./components/Terms").then(({ Terms }) => ({ default: Terms })));
 const Support = lazy(() => import("./components/Support").then(({ Support }) => ({ default: Support })));
@@ -77,7 +81,7 @@ function Home() {
     },
     {
       question: "How much does it cost?",
-      answer: "Luv is free to download and includes limited note sending. Premium is offered through Weekly and Monthly subscriptions or a one-time Lifetime purchase; Apple shows the exact price and any eligible trial before purchase."
+      answer: "Luv is free to download and includes limited note sending. Weekly, Monthly, or Lifetime Premium options may be offered; the products currently available to you, exact price, and any eligible trial appear in Luv and Apple's purchase sheet before you confirm."
     },
     {
       question: "Can I connect with more than one person?",
@@ -470,7 +474,7 @@ function Home() {
               <span className="text-[#d5c4a1]">today</span>
             </h2>
             <p className="text-base text-[#a89984] mb-12 max-w-md mx-auto">
-              Free to download. No ads. Optional Premium. Just you two.
+              Free to download. No in-app ads. Optional Premium. Just you two.
             </p>
             <motion.a
               href="https://apps.apple.com/app/id6763015481"
@@ -492,7 +496,7 @@ function Home() {
               <div>•</div>
               <div>Free</div>
               <div>•</div>
-              <div>No ads</div>
+              <div>No in-app ads</div>
               <div>•</div>
               <div>Stored for delivery</div>
             </div>
@@ -540,21 +544,35 @@ export default function App() {
     window.scrollTo(0, 0);
   }, [location.pathname]);
   return (
-    <Suspense fallback={<div className="min-h-screen w-full bg-[#1f1b18]" aria-label="Loading page" />}>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<div className="overflow-x-hidden w-full min-h-screen"><CinematicHero howItWorksHref="/how-it-works" /></div>} />
-          <Route path="/cinematic" element={<div className="overflow-x-hidden w-full min-h-screen"><CinematicHero howItWorksHref="/how-it-works" /></div>} />
-          <Route path="/old" element={<Home />} />
-          <Route path="/how-it-works" element={<HowItWorksPage />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/support" element={<Support />} />
-          <Route path="/connect" element={<Connect />} />
-          <Route path="/forgot" element={<ForgotPassword />} />
-          <Route path="/reset" element={<ResetPassword />} />
-        </Routes>
-      </AnimatePresence>
-    </Suspense>
+    <>
+      <RouteMeta />
+      <Suspense
+        fallback={
+          <div
+            className="min-h-screen w-full bg-[#1f1b18]"
+            role="status"
+            aria-live="polite"
+            aria-label="Loading page"
+          />
+        }
+      >
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<div className="overflow-x-hidden w-full min-h-screen"><CinematicHero howItWorksHref="/how-it-works" /></div>} />
+            <Route path="/cinematic" element={<Navigate to="/" replace />} />
+            <Route path="/old" element={<Navigate to="/" replace />} />
+            <Route path="/how-it-works" element={<HowItWorksPage />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="/connect" element={<Connect />} />
+            <Route path="/c/:code" element={<Connect />} />
+            <Route path="/forgot" element={<ForgotPassword />} />
+            <Route path="/reset" element={<ResetPassword />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AnimatePresence>
+      </Suspense>
+    </>
   );
 }

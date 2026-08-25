@@ -5,7 +5,7 @@
       {
         "appIDs": ["U652N88NZ8.io.luv.luv"],
         "components": [
-          { "/": "/connect*", "comment": "invite links with ?code=" },
+          { "/": "/connect", "comment": "invite links with ?code=" },
           { "/": "/c/*", "comment": "short invite links" }
         ]
       }

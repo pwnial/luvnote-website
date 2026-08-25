@@ -1,58 +1,53 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import { motion } from "motion/react";
 import { Copy, Check } from "lucide-react";
 import "../../styles/cinematic.css";
 
 const APP_STORE_URL = "https://apps.apple.com/app/id6763015481";
-const APP_OPEN_TIMEOUT_MS = 2500;
+const INVITE_CODE_PATTERN = /^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]{8}$/;
+
+function normalizedInviteCode(raw: string | null | undefined) {
+  const candidate = (raw ?? "").trim().toUpperCase();
+  return INVITE_CODE_PATTERN.test(candidate) ? candidate : null;
+}
 
 export function Connect() {
+  const { code: pathCode } = useParams<{ code?: string }>();
   const [searchParams] = useSearchParams();
-  const code = (searchParams.get("code") ?? "").toUpperCase().trim();
+  const queryEntries = Array.from(searchParams.entries());
+  const isPathInvite = pathCode !== undefined;
+  const hasValidInviteShape = isPathInvite
+    ? queryEntries.length === 0
+    : queryEntries.length === 0
+      || (queryEntries.length === 1 && queryEntries[0][0] === "code");
+  const rawCode = pathCode ?? (queryEntries.length === 1 && queryEntries[0][0] === "code" ? queryEntries[0][1] : "");
+  const code = normalizedInviteCode(rawCode);
+  const hasInvalidCode = !hasValidInviteShape || (rawCode.trim().length > 0 && code === null);
 
-  const [copied, setCopied] = useState(false);
-  const [stage, setStage] = useState<"trying-app" | "fallback">("fallback");
-
-  useEffect(() => {
-    if (!code) return;
-
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    if (!isIOS) return;
-
-    setStage("trying-app");
-
-    // Auto-copy the invite link so the app can pick it up off the clipboard
-    // after an App Store install (the install strips the deep link, so the
-    // freshly-installed app reads the clipboard on first launch to auto-connect).
-    // Best-effort: ignore failures (clipboard may be unavailable pre-interaction).
-    navigator.clipboard
-      ?.writeText(`https://luvnote.app/connect?code=${code}`)
-      .catch(() => {});
-
-    // Attempt to open the iOS app via custom URL scheme.
-    // If the app is installed, iOS handles `luv://` and the page goes to background.
-    // If not, the page stays foreground and the timer below redirects to the App Store.
-    window.location.href = `luv://connect?code=${encodeURIComponent(code)}`;
-
-    const timer = window.setTimeout(() => {
-      if (document.visibilityState === "visible") {
-        // Page never went to background → app didn't open → send them to install it.
-        window.location.href = APP_STORE_URL;
-      }
-    }, APP_OPEN_TIMEOUT_MS);
-
-    return () => window.clearTimeout(timer);
-  }, [code]);
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
 
   async function copyCode() {
     if (!code) return;
     try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2000);
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(code);
+      } else {
+        const copyField = document.createElement("textarea");
+        copyField.value = code;
+        copyField.setAttribute("readonly", "");
+        copyField.style.position = "fixed";
+        copyField.style.opacity = "0";
+        document.body.appendChild(copyField);
+        copyField.select();
+        const copied = document.execCommand("copy");
+        copyField.remove();
+        if (!copied) throw new Error("Clipboard copy was blocked");
+      }
+      setCopyState("copied");
+      window.setTimeout(() => setCopyState("idle"), 2500);
     } catch {
-      // Clipboard not available — user can still type the code manually.
+      setCopyState("failed");
     }
   }
 
@@ -95,44 +90,30 @@ export function Connect() {
           className="max-w-md w-full text-center"
         >
           <h1 className="font-sans font-black tracking-tight text-4xl md:text-5xl leading-[1.05] mb-4 text-silver-matte">
-            {stage === "trying-app" ? "Opening luv…" : "Connect on luv"}
+            {hasInvalidCode ? "Invite not recognized" : "Connect on luv"}
           </h1>
 
-          {stage === "trying-app" ? (
-            <p className="text-[15px] text-[#a89984] mb-12 leading-relaxed max-w-sm mx-auto">
-              If the app doesn't open, we'll send you to the App Store.
-            </p>
-          ) : (
-            <p className="text-[15px] text-[#ebdbb2]/70 mb-12 leading-relaxed max-w-sm mx-auto">
-              {code
-                ? "Get the app and enter this code to connect:"
-                : "Get the app to start sending love notes."}
-            </p>
-          )}
+          <p className="text-[15px] text-[#ebdbb2]/70 mb-9 leading-relaxed max-w-sm mx-auto">
+            {hasInvalidCode
+              ? "This link does not contain a valid eight-character Luv code. Ask your person to share a fresh invite from the app."
+              : code
+                ? "Keep this code with you while you open or install Luv. Nothing is copied and nothing opens until you choose it."
+                : "Get the app to start sending quiet love notes to your connected person."}
+          </p>
 
           {code && (
-            <motion.button
+            <motion.div
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              onClick={copyCode}
-              className="surface-panel surface-panel-hover w-full mb-6 px-7 py-6 rounded-3xl flex items-center justify-between gap-4 group"
-              aria-label="Copy connection code"
+              className="surface-panel w-full mb-5 px-6 py-6 rounded-3xl"
             >
-              <span className="font-sans font-bold text-3xl md:text-4xl tracking-[0.32em] text-[#fbf1c7]">
+              <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.24em] text-[#928374]">Your connection code</span>
+              <span className="block select-all font-sans font-bold text-3xl md:text-4xl tracking-[0.25em] text-[#fbf1c7]" aria-label={`Connection code ${code.split("").join(" ")}`}>
                 {code}
               </span>
-              {copied ? (
-                <span className="font-mono text-[11px] uppercase tracking-wide text-[#b8bb26] flex items-center gap-2 whitespace-nowrap">
-                  <Check className="w-4 h-4" /> Copied
-                </span>
-              ) : (
-                <span className="font-mono text-[11px] uppercase tracking-wide text-[#928374] flex items-center gap-2 whitespace-nowrap group-hover:text-[#d3869b] transition-colors">
-                  <Copy className="w-4 h-4" /> Copy
-                </span>
-              )}
-            </motion.button>
+            </motion.div>
           )}
 
           {code && (
@@ -141,14 +122,40 @@ export function Connect() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.18 }}
+              onClick={copyCode}
+              className="btn-modern-dark w-full mb-3 px-8 py-4 rounded-[1.25rem] text-[15px] font-medium flex items-center justify-center gap-2"
+              aria-describedby="invite-copy-status"
+            >
+              {copyState === "copied" ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+              {copyState === "copied" ? "Code copied" : "Copy code"}
+            </motion.button>
+          )}
+
+          {code && (
+            <p id="invite-copy-status" aria-live="polite" className="mb-5 min-h-5 text-xs leading-relaxed text-[#928374]">
+              {copyState === "failed"
+                ? "Clipboard access was blocked. Press and hold the code above to copy it."
+                : copyState === "copied"
+                  ? "Copied. In Luv, tap Paste Code when the app asks for your invite."
+                  : "Luv reads a copied code only after you tap Paste Code in the app."}
+            </p>
+          )}
+
+          {code && (
+            <motion.button
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               onClick={manualOpenApp}
-              className="btn-modern-dark w-full mb-5 px-8 py-4 rounded-[1.25rem] text-[15px] font-medium"
+              className="btn-modern-light w-full mb-4 px-8 py-4 rounded-[1.25rem] text-[15px] font-semibold"
             >
               Open in luv app
             </motion.button>
           )}
 
-          {/* App Store CTA — restyled badge as ivory tactile button */}
+          {/* App Store is an explicit choice. Invite codes survive visually on
+              this page; the app itself only reads the clipboard after Paste. */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -159,7 +166,9 @@ export function Connect() {
               href={APP_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-modern-light inline-flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem]"
+              className={code
+                ? "inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-[1.15rem] border border-[#ebdbb2]/15 text-[#ebdbb2] hover:border-[#d3869b]/40 transition-colors"
+                : "btn-modern-light inline-flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem]"}
               aria-label="Download on the App Store"
             >
               <svg
@@ -175,7 +184,7 @@ export function Connect() {
                   Download on the
                 </span>
                 <span className="font-sans font-bold text-lg tracking-tight">
-                  App Store
+                  {code ? "Install luv" : "App Store"}
                 </span>
               </span>
             </a>
@@ -184,7 +193,7 @@ export function Connect() {
           <div className="cinematic-divider max-w-[600px] mx-auto mt-12 mb-6" />
 
           <div className="font-mono text-[11px] uppercase tracking-wide text-[#928374]">
-            iOS 18.5+ · Free · No ads
+            iOS 18.5+ · Free to start · No in-app ads
           </div>
         </motion.div>
       </div>

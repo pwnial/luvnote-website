@@ -13,7 +13,7 @@ export function Support() {
     { question: "Why isn't the widget updating?", answer: "First confirm the new note appears inside Luv. Then open Luv on both phones, check that notifications are allowed, and confirm the Luv widget is still installed. iOS schedules background and widget refreshes, so an update may be delayed—especially after force-quitting the app or losing connectivity. If it remains stale, remove and re-add the widget and email us with your iOS version, Luv version, and whether the note appears in the app." },
     { question: "Can I use Luv with multiple partners?", answer: "Luv currently supports one active partner connection per account. You must leave the existing connection before connecting with someone else." },
     { question: "How are my notes protected?", answer: "Luv encrypts data while it travels over the network and stores notes in Supabase so they can be delivered to your connected partner. Notes are not end-to-end encrypted, which means Luv's backend and authorized service providers can technically process stored note content. See the Privacy Policy for the full details." },
-    { question: "How do I cancel or restore a purchase?", answer: "Weekly and Monthly subscriptions are managed through Apple. On iPhone, go to Settings → [Your Name] → Subscriptions → Luv to manage or cancel. Lifetime does not renew. Use Restore Purchases inside Luv while signed in to the Luv account that should receive access and the Apple Account that owns the purchase. Apple handles refund requests." },
+    { question: "How do I manage or restore a purchase?", answer: "If Apple shows an active Luv subscription, manage or cancel it from iPhone Settings → [Your Name] → Subscriptions. For an eligible purchase, use Restore Purchases inside Luv while signed in to the Luv account that should receive access and the Apple Account that owns the purchase. Premium appears only after Apple and Luv confirm the purchase and account association. If a restore stays pending, contact support. Apple handles App Store refund requests." },
     { question: "What iOS version do I need?", answer: "Luv requires iOS 18.5 or later to support home screen widgets and the latest notification features." },
     { question: "Where can I add the widget?", answer: "Luv supports small and medium Home Screen widgets and a rectangular Lock Screen widget. Add widgets through iOS's widget editor after opening Luv at least once." },
     { question: "What happens if I delete the app or my account?", answer: "Deleting the app does not delete your Luv account or stored notes. To request account deletion, use Delete Account in Luv Settings. Processing is asynchronous, so wait for the app to confirm completion. If the request is unavailable, delayed, or you cannot access the app, email privacy@luvnote.app." },
@@ -157,10 +157,13 @@ export function Support() {
             </AnimatedSection>
             <div className="border-t border-[#ebdbb2]/10">
               {faqs.map((faq, index) => (
-                <AnimatedSection key={index} delay={0.05 * (index + 1)}>
+                <AnimatedSection key={faq.question} delay={0.05 * (index + 1)}>
                   <div className="border-b border-[#ebdbb2]/10">
                     <button
+                      id={`support-faq-button-${index}`}
                       onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                      aria-expanded={openFaq === index}
+                      aria-controls={`support-faq-panel-${index}`}
                       className="w-full flex items-center justify-between py-6 text-left cursor-pointer group"
                     >
                       <span className="text-base text-[#ebdbb2] font-medium tracking-tight pr-4 group-hover:text-[#fbf1c7] transition-colors">
@@ -177,6 +180,9 @@ export function Support() {
                     <AnimatePresence initial={false}>
                       {openFaq === index && (
                         <motion.div
+                          id={`support-faq-panel-${index}`}
+                          role="region"
+                          aria-labelledby={`support-faq-button-${index}`}
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
