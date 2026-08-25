@@ -312,18 +312,18 @@ export function HowItWorksFilm() {
       <div className="annot absolute inset-y-0 right-0 w-1/2 hidden lg:flex flex-col justify-center gap-12 pr-[8%] pl-8 z-20">
         <div className="annot-1">
           <div className="annot-line h-px w-12 mb-4" />
-          <h3 className="text-3d-matte text-2xl md:text-3xl font-bold tracking-tight mb-2">It&apos;s already there.</h3>
-          <p className="text-[#a89984] leading-relaxed max-w-[40ch]">No app to open. No notification to clear. Your note just lives on their lock screen — waiting for the next time they glance down.</p>
+          <h3 className="text-3d-matte text-2xl md:text-3xl font-bold tracking-tight mb-2">Designed for a glance.</h3>
+          <p className="text-[#a89984] leading-relaxed max-w-[40ch]">When iOS refreshes the widget, your latest note can be waiting on their lock screen without a notification banner to clear.</p>
         </div>
         <div className="annot-2">
           <div className="annot-line h-px w-12 mb-4" />
-          <h3 className="text-3d-matte text-2xl md:text-3xl font-bold tracking-tight mb-2">Only you two.</h3>
-          <p className="text-[#a89984] leading-relaxed max-w-[40ch]">End-to-end encrypted before it ever leaves your phone. We can&apos;t read it. No one can.</p>
+          <h3 className="text-3d-matte text-2xl md:text-3xl font-bold tracking-tight mb-2">Made for one connection.</h3>
+          <p className="text-[#a89984] leading-relaxed max-w-[40ch]">One active partner at a time. Notes are stored by Luv so the app can deliver them to your connected person.</p>
         </div>
         <div className="annot-3">
           <div className="annot-line h-px w-12 mb-4" />
-          <h3 className="text-3d-matte text-2xl md:text-3xl font-bold tracking-tight mb-2">They feel it instantly.</h3>
-          <p className="text-[#a89984] leading-relaxed max-w-[40ch]">The second you hit send, it&apos;s on their screen. A little &ldquo;I&apos;m thinking about you&rdquo; — all day long.</p>
+          <h3 className="text-3d-matte text-2xl md:text-3xl font-bold tracking-tight mb-2">Sent in a tap.</h3>
+          <p className="text-[#a89984] leading-relaxed max-w-[40ch]">Luv stores the note when you send it. Widget timing depends on connectivity, Apple&apos;s background delivery, and iOS refresh scheduling.</p>
         </div>
       </div>
 

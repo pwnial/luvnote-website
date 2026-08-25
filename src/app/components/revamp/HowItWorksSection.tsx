@@ -7,7 +7,7 @@ const EASE = [0.25, 0.1, 0.25, 1] as const;
 const STEPS = [
   { n: "1", icon: Plus, title: "Add the Luv widget", body: "Both partners add it to their home screen." },
   { n: "2", icon: PenLine, title: "Write a message", body: "Type what's on your mind." },
-  { n: "3", icon: Sparkles, title: "It appears instantly", body: "Right on their lock screen widget." },
+  { n: "3", icon: Sparkles, title: "It reaches their widget", body: "Timing depends on iOS background delivery and refresh scheduling." },
 ];
 
 export function HowItWorksSection({ id }: { id?: string }) {

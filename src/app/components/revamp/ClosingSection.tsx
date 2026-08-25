@@ -74,7 +74,7 @@ export function ClosingSection() {
           variants={itemV}
           className="text-[#ebdbb2]/85 text-lg md:text-xl leading-relaxed max-w-[44ch]"
         >
-          Free to download. No ads. No tracking.{" "}
+          Free to download. No ads. Optional Premium.{" "}
           <span className="text-[#fbf1c7]">Just you two.</span>
         </motion.p>
 
@@ -107,7 +107,7 @@ export function ClosingSection() {
           variants={itemV}
           className="font-mono text-[11px] md:text-xs tracking-[0.18em] text-[#a89984] uppercase mt-1"
         >
-          iOS 18.5+ · Free · No ads · End-to-end encrypted
+          iOS 18.5+ · Free to start · No ads · Notes stored for delivery
         </motion.p>
       </motion.div>
 

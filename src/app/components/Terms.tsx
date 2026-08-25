@@ -6,10 +6,10 @@ import { AnimatedSection } from "./AnimatedSection";
 
 export function Terms() {
   const tldrCards = [
-    { icon: <FileCheck className="w-5 h-5" />, title: "Fair Agreement", desc: "Use the app respectfully and we'll take care of you" },
+    { icon: <FileCheck className="w-5 h-5" />, title: "Plain Language", desc: "These terms explain the service, purchases, and your responsibilities" },
     { icon: <Shield className="w-5 h-5" />, title: "Age 13+", desc: "You must be at least 13 years old to use Luv" },
-    { icon: <CreditCard className="w-5 h-5" />, title: "App Store Billing", desc: "All payments handled securely through Apple" },
-    { icon: <Ban className="w-5 h-5" />, title: "Zero Tolerance", desc: "Harassment or abuse means immediate account termination" },
+    { icon: <CreditCard className="w-5 h-5" />, title: "App Store Purchases", desc: "Apple processes Weekly, Monthly, and Lifetime purchases" },
+    { icon: <Ban className="w-5 h-5" />, title: "Respectful Use", desc: "Harassment, abuse, and illegal content are not allowed" },
   ];
 
   const sections = [
@@ -27,7 +27,7 @@ export function Terms() {
       title: "Description of Service",
       content: (
         <p className="text-[#a89984] leading-relaxed">
-          Luv is a private messaging app for couples. The service includes private messaging between connected partners, home screen widget updates via push notifications, profile management, and premium subscription features where applicable.
+          Luv lets one connected pair exchange notes that are stored by the service and displayed in the app and supported iPhone widgets. The service also includes profiles, relationship activity, optional scheduled notes, and Premium features. Widget and background delivery depend on Apple systems, device settings, connectivity, and service availability and may not occur immediately.
         </p>
       ),
     },
@@ -49,7 +49,7 @@ export function Terms() {
             To use certain features, create an account with your email and display name. You're responsible for maintaining confidentiality of your credentials and all activity under your account.
           </p>
           <p className="text-[#a89984] leading-relaxed">
-            You may delete your account anytime through settings. We reserve the right to suspend or terminate accounts that violate these terms.
+            You may submit an account-deletion request through Settings when that service is available. Deletion is asynchronous and is not complete until the app confirms completion. If the request cannot be submitted or you cannot access the app, contact <a href="mailto:privacy@luvnote.app" className="text-[#d3869b] hover:underline">privacy@luvnote.app</a>. We may suspend or terminate accounts that violate these terms.
           </p>
         </>
       ),
@@ -81,9 +81,12 @@ export function Terms() {
       num: "07",
       title: "Subscriptions & Billing",
       content: (
-        <p className="text-[#a89984] leading-relaxed">
-          All payments are processed through Apple's App Store. Subscriptions auto-renew unless cancelled at least 24 hours before the billing period ends. Refunds are handled by Apple per their policy.
-        </p>
+        <>
+          <p className="text-[#a89984] mb-4 leading-relaxed"><span className="text-[#ebdbb2]">Weekly and Monthly</span> are auto-renewing subscriptions. Payment is charged to your Apple Account when Apple confirms the purchase. Unless you turn off auto-renewal at least 24 hours before the current period ends, Apple may renew and charge the subscription for the next period. You can manage or cancel it in your Apple Account subscription settings. Cancellation stops future renewal but normally leaves access available through the already-paid period.</p>
+          <p className="text-[#a89984] mb-4 leading-relaxed">A free trial may be offered for an eligible product or account. Eligibility, trial length, price, billing period, and any required consent are shown by Luv and Apple before purchase; the terms displayed at checkout control.</p>
+          <p className="text-[#a89984] mb-4 leading-relaxed"><span className="text-[#ebdbb2]">Lifetime</span> is a one-time, non-consumable purchase and does not auto-renew. It provides Premium access for the duration Luv offers the applicable Premium service; it is not a promise that the app or every feature will exist forever. Purchases may be restorable through the Apple Account that owns them.</p>
+          <p className="text-[#a89984] leading-relaxed">The price shown in the App Store purchase sheet before confirmation is the price that applies, including any local currency and taxes Apple displays. Apple processes billing and decides refund requests. Luv cannot issue an App Store refund directly. If Apple refunds, revokes, or reverses a purchase, the related Premium access may end. You can <a href="https://support.apple.com/billing" target="_blank" rel="noopener noreferrer" className="text-[#d3869b] hover:underline">manage billing with Apple</a> or <a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener noreferrer" className="text-[#d3869b] hover:underline">request a refund from Apple</a>.</p>
+        </>
       ),
     },
     {
@@ -109,7 +112,7 @@ export function Terms() {
       title: "Disclaimers",
       content: (
         <p className="text-[#a89984] leading-relaxed">
-          The app is provided "as is" and "as available." We don't guarantee uninterrupted or error-free service. We disclaim all warranties to the fullest extent permitted by law.
+          The app is provided "as is" and "as available." We do not guarantee uninterrupted, immediate, or error-free operation. Apple controls important parts of push notifications, widget refresh scheduling, purchases, and device permissions. We disclaim warranties only to the extent permitted by applicable law.
         </p>
       ),
     },
@@ -136,7 +139,7 @@ export function Terms() {
       title: "Third-Party Services",
       content: (
         <p className="text-[#a89984] leading-relaxed">
-          The app integrates with Apple's App Store, push notification services, and cloud storage providers. Your use of these services is subject to their respective terms.
+          Luv relies on third-party services including Apple, Supabase, PostHog, and Meta. Their availability and processing are governed by their own terms and policies. See our <a href="/privacy" className="text-[#d3869b] hover:underline">Privacy Policy</a> for details about the data involved.
         </p>
       ),
     },
@@ -154,7 +157,7 @@ export function Terms() {
       title: "Governing Law & Disputes",
       content: (
         <p className="text-[#a89984] leading-relaxed">
-          These terms are governed by the laws of the jurisdiction where Luv operates. Disputes shall be resolved through binding arbitration except where prohibited by law. If any provision is unenforceable, the remaining provisions stand. These terms, with our Privacy Policy, constitute the entire agreement.
+          Applicable law governs these terms. Nothing here limits consumer or privacy rights that cannot legally be waived. If any provision is unenforceable, the remaining provisions continue to apply. These terms, together with our Privacy Policy and the purchase terms Apple shows at checkout, form the agreement governing your use of Luv.
         </p>
       ),
     },
@@ -190,7 +193,7 @@ export function Terms() {
               <div className="mb-8">
                 <a href="/" className="font-mono text-[13px] tracking-wide text-[#a89984] hover:text-[#fbf1c7] transition-colors">← luv</a>
               </div>
-              <p className="font-mono text-[11px] text-[#928374] uppercase tracking-[0.25em] mb-6">Last updated June 2026</p>
+              <p className="font-mono text-[11px] text-[#928374] uppercase tracking-[0.25em] mb-6">Last updated August 25, 2026</p>
               <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 text-silver-matte">Terms of Service</h1>
               <p className="text-lg text-[#ebdbb2]/70 max-w-lg mx-auto leading-relaxed">
                 The rules of the road. Fair, simple, and transparent.
@@ -250,7 +253,7 @@ export function Terms() {
         <section className="px-6 pb-20">
           <div className="max-w-[900px] mx-auto text-center">
             <p className="text-sm text-[#a89984]">
-              Questions? <a href="mailto:support@luv.app" className="text-[#d3869b] hover:underline">support@luv.app</a>
+              Questions? <a href="mailto:support@luvnote.app" className="text-[#d3869b] hover:underline">support@luvnote.app</a>
             </p>
           </div>
         </section>

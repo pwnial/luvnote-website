@@ -207,9 +207,8 @@ export function CinematicHero({
   cardHeading = "Their home screen. Your words.",
   cardDescription = (
     <>
-      <span className="text-[#fbf1c7] font-semibold">luv</span> slips a private note onto your
-      partner&apos;s lock screen the instant you send it. No app to open, no notification to miss —
-      just you, waiting for them, all day.
+      <span className="text-[#fbf1c7] font-semibold">luv</span> sends a note to your connected
+      partner. When iOS refreshes their widget, your latest words are there for their next glance.
     </>
   ),
   metricValue = 365,
@@ -431,7 +430,7 @@ export function CinematicHero({
           <span className="text-[#ebdbb2]/20">·</span>
           <span>iOS 18.5+</span>
           <span className="text-[#ebdbb2]/20">·</span>
-          <span>End-to-end encrypted</span>
+          <span>Notes stored for delivery</span>
         </div>
       </div>
 

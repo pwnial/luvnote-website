@@ -62,19 +62,19 @@ function Home() {
   const faqs = [
     {
       question: "How does the widget update work?",
-      answer: "When you send a message in the Luv app, it instantly appears on your partner's home screen widget using silent push notifications. No need to open the app - it just updates automatically."
+      answer: "Luv stores the note, then requests a silent background refresh on your partner's iPhone. Apple and iOS control background delivery and widget scheduling, so the update may be delayed until the app or widget refreshes."
     },
     {
-      question: "Is it really end-to-end encrypted?",
-      answer: "Yes. All messages are encrypted on your device before being sent, and can only be decrypted by your partner's device. We can't read your messages - they're yours alone."
+      question: "How are notes protected?",
+      answer: "Notes are encrypted in transit and stored in Supabase so Luv can deliver them. They are not end-to-end encrypted, which means Luv's backend and authorized service providers can technically process stored note content."
     },
     {
       question: "Does it work with Android?",
-      answer: "Currently Luv is iOS-only (iOS 18.5+). We're focused on making the best possible iOS experience first, but Android support is on our roadmap."
+      answer: "No. Luv currently requires an iPhone running iOS 18.5 or later."
     },
     {
       question: "How much does it cost?",
-      answer: "Luv is free to download and use. We may introduce optional premium features in the future, but the core widget messaging will always be free."
+      answer: "Luv is free to download and includes limited note sending. Premium is offered through Weekly and Monthly subscriptions or a one-time Lifetime purchase; Apple shows the exact price and any eligible trial before purchase."
     },
     {
       question: "Can I connect with more than one person?",
@@ -82,7 +82,7 @@ function Home() {
     },
     {
       question: "What if we both send messages at the same time?",
-      answer: "Both widgets will update! You'll each see the other person's message. The app handles simultaneous updates seamlessly."
+      answer: "Both notes can be stored at the same time. Each person's app or widget shows the latest note it successfully retrieves on its next refresh."
     }
   ];
 
@@ -92,7 +92,7 @@ function Home() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="text-white min-h-screen font-mono relative"
+      className="text-white min-h-screen font-mono relative overflow-x-hidden w-full"
     >
       {/* Background */}
       <div className="fixed inset-0 z-0 bg-[#282828]" />
@@ -232,8 +232,8 @@ function Home() {
                 transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
               >
                 <p className="text-base text-[#a89984] mb-8 max-w-lg leading-relaxed">
-                  Type something sweet. It appears instantly on their home screen widget. 
-                  No notifications. No opening apps. Just there — waiting for them.
+                  Type something sweet and send it to your connected person. When iOS refreshes
+                  their widget, your latest note is there for their next glance.
                 </p>
               </motion.div>
               <motion.div
@@ -296,9 +296,9 @@ function Home() {
                 <Zap className="w-5 h-5 text-[#ebdbb2]" />
               </motion.div>
               <div>
-                <h3 className="text-2xl md:text-3xl text-[#ebdbb2] mb-3">Instant updates</h3>
+                <h3 className="text-2xl md:text-3xl text-[#ebdbb2] mb-3">Quiet updates</h3>
                 <p className="text-[#a89984] leading-relaxed">
-                  Your words appear on their lock screen the moment you hit send. No notification banners. No inbox to check. Just there — waiting for them.
+                  Your latest note can appear on their widget without a notification banner. Delivery timing depends on iOS and connectivity.
                 </p>
               </div>
             </div>
@@ -314,9 +314,9 @@ function Home() {
                 <Lock className="w-5 h-5 text-[#ebdbb2]" />
               </motion.div>
               <div>
-                <h3 className="text-2xl md:text-3xl text-[#ebdbb2] mb-3">Completely private</h3>
+                <h3 className="text-2xl md:text-3xl text-[#ebdbb2] mb-3">Made for one connection</h3>
                 <p className="text-[#a89984] leading-relaxed">
-                  End-to-end encrypted. We can't read your messages and we never will. What you say stays between you two.
+                  One active partner and no social feed. Notes are stored by Luv so the service can deliver them.
                 </p>
               </div>
             </div>
@@ -382,8 +382,8 @@ function Home() {
                   <div className="absolute -left-8 top-0.5 w-6 h-6 rounded-full border-2 border-[#ebdbb2]/60 bg-[#282828] flex items-center justify-center">
                     <div className="w-2 h-2 rounded-full bg-[#ebdbb2]" />
                   </div>
-                  <div className="text-lg text-[#ebdbb2] mb-1">It appears instantly</div>
-                  <p className="text-sm text-[#928374]">Right on their lock screen widget</p>
+                  <div className="text-lg text-[#ebdbb2] mb-1">It reaches their widget</div>
+                  <p className="text-sm text-[#928374]">Timing depends on iOS background delivery and refresh scheduling</p>
                 </div>
               </div>
             </AnimatedSection>
@@ -467,7 +467,7 @@ function Home() {
               <span className="text-[#d5c4a1]">today</span>
             </h2>
             <p className="text-base text-[#a89984] mb-12 max-w-md mx-auto">
-              Free to download. No ads. No tracking. Just you two.
+              Free to download. No ads. Optional Premium. Just you two.
             </p>
             <motion.a
               href="https://apps.apple.com/app/id6763015481"
@@ -491,7 +491,7 @@ function Home() {
               <div>•</div>
               <div>No ads</div>
               <div>•</div>
-              <div>E2EE</div>
+              <div>Stored for delivery</div>
             </div>
           </div>
         </AnimatedSection>

@@ -10,14 +10,14 @@ const PILLARS: Pillar[] = [
   {
     index: "01",
     icon: Zap,
-    title: "Instant updates",
-    body: "Your words appear on their lock screen the moment you hit send. No notification banners. No inbox to check. Just there — waiting for them.",
+    title: "Quiet updates",
+    body: "Your latest note can appear on their widget without a notification banner. Delivery timing depends on iOS and connectivity.",
   },
   {
     index: "02",
     icon: Lock,
-    title: "Completely private",
-    body: "End-to-end encrypted. We can't read your messages and we never will. What you say stays between you two.",
+    title: "Clear by design",
+    body: "One active partner connection and no social feed. Notes are stored by Luv so the service can deliver them.",
   },
   {
     index: "03",

@@ -5,19 +5,19 @@ import { HelpCircle, Plus } from "lucide-react";
 const FAQS = [
   {
     q: "How does the widget update work?",
-    a: "When you send a message in the Luv app, it instantly appears on your partner's home screen widget using silent push notifications. No need to open the app — it just updates automatically.",
+    a: "Luv stores the note, then requests a silent background refresh on your partner's iPhone. Apple and iOS control background delivery and widget scheduling, so the update may be delayed until the app or widget refreshes.",
   },
   {
-    q: "Is it really end-to-end encrypted?",
-    a: "Yes. All messages are encrypted on your device before being sent, and can only be decrypted by your partner's device. We can't read your messages — they're yours alone.",
+    q: "How are notes protected?",
+    a: "Notes are encrypted in transit and stored in Supabase so Luv can deliver them. They are not end-to-end encrypted, which means Luv's backend and authorized service providers can technically process stored note content.",
   },
   {
     q: "Does it work with Android?",
-    a: "Currently Luv is iOS-only (iOS 18.5+). We're focused on making the best possible iOS experience first, but Android support is on our roadmap.",
+    a: "No. Luv currently requires an iPhone running iOS 18.5 or later.",
   },
   {
     q: "How much does it cost?",
-    a: "Luv is free to download and start. Optional premium features unlock extras like streaks, but sending a note to your person is always part of the experience.",
+    a: "Luv is free to download and includes limited note sending. Premium is offered through Weekly and Monthly subscriptions or a one-time Lifetime purchase, and unlocks unlimited daily notes, shared streaks, and scheduled surprises. Apple shows the exact price and any eligible trial before purchase.",
   },
   {
     q: "Can I connect with more than one person?",
@@ -25,7 +25,7 @@ const FAQS = [
   },
   {
     q: "What if we both send at the same time?",
-    a: "Both widgets update. You'll each see the other person's message — the app handles simultaneous updates seamlessly.",
+    a: "Both notes can be stored at the same time. Each person's app or widget will show the latest note it successfully retrieves on its next refresh.",
   },
 ];
 
@@ -196,10 +196,10 @@ export function FaqSection() {
               <p className="text-[#fbf1c7] font-medium text-base md:text-lg tracking-tight">
                 Still have a question?
               </p>
-              <p className="text-[#928374] text-sm mt-1">We usually reply within a day.</p>
+              <p className="text-[#928374] text-sm mt-1">Email our support team.</p>
             </div>
             <motion.a
-              href="mailto:hello@luv.app"
+              href="mailto:support@luvnote.app"
               className="btn-modern-dark px-8 py-4 rounded-[1.25rem] whitespace-nowrap text-sm font-medium"
               whileHover={reduced ? undefined : { y: -2, scale: 1.02 }}
               whileTap={reduced ? undefined : { scale: 0.98 }}

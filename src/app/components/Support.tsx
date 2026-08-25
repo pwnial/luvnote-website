@@ -9,14 +9,14 @@ export function Support() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const faqs = [
-    { question: "How do I connect with my partner?", answer: "Both of you need to download the app. One person generates a connection code in Settings, and the other enters that code to connect. Once connected, your widgets will sync automatically." },
-    { question: "Why isn't the widget updating?", answer: "Make sure you've added the Luv widget to your home screen, granted notification permissions, and have a stable internet connection. Try removing and re-adding the widget if issues persist." },
-    { question: "Can I use Luv with multiple partners?", answer: "No, Luv is designed exclusively for couples. Each account can only be connected to one partner at a time to maintain the intimate, personal nature of the app." },
-    { question: "Is my data secure and private?", answer: "Yes! All messages are end-to-end encrypted. We can't read your messages, and they're only shared between you and your connected partner. See our Privacy Policy for full details." },
-    { question: "How do I cancel my subscription?", answer: "Subscriptions are managed through the App Store. Go to Settings → [Your Name] → Subscriptions → Luv, then tap Cancel Subscription." },
+    { question: "How do I connect with my partner?", answer: "Both people need a Luv account. One person shares the connection code or invite link shown by the app, and the other accepts it in Luv. Each account can have one active partner connection at a time." },
+    { question: "Why isn't the widget updating?", answer: "First confirm the new note appears inside Luv. Then open Luv on both phones, check that notifications are allowed, and confirm the Luv widget is still installed. iOS schedules background and widget refreshes, so an update may be delayed—especially after force-quitting the app or losing connectivity. If it remains stale, remove and re-add the widget and email us with your iOS version, Luv version, and whether the note appears in the app." },
+    { question: "Can I use Luv with multiple partners?", answer: "Luv currently supports one active partner connection per account. You must leave the existing connection before connecting with someone else." },
+    { question: "How are my notes protected?", answer: "Luv encrypts data while it travels over the network and stores notes in Supabase so they can be delivered to your connected partner. Notes are not end-to-end encrypted, which means Luv's backend and authorized service providers can technically process stored note content. See the Privacy Policy for the full details." },
+    { question: "How do I cancel or restore a purchase?", answer: "Weekly and Monthly subscriptions are managed through Apple. On iPhone, go to Settings → [Your Name] → Subscriptions → Luv to manage or cancel. Lifetime does not renew. Use Restore Purchases inside Luv while signed in to the Luv account that should receive access and the Apple Account that owns the purchase. Apple handles refund requests." },
     { question: "What iOS version do I need?", answer: "Luv requires iOS 18.5 or later to support home screen widgets and the latest notification features." },
-    { question: "Can I customize the widget appearance?", answer: "Yes! Premium subscribers can customize widget colors, fonts, and styles. Free users get the default Gruvbox theme." },
-    { question: "What happens to my messages if I delete the app?", answer: "If you delete the app without first deleting your account, your messages remain stored. You can reinstall and log back in to access them. To permanently delete everything, use the Delete Account option in Settings first." },
+    { question: "Where can I add the widget?", answer: "Luv supports small and medium Home Screen widgets and a rectangular Lock Screen widget. Add widgets through iOS's widget editor after opening Luv at least once." },
+    { question: "What happens if I delete the app or my account?", answer: "Deleting the app does not delete your Luv account or stored notes. To request account deletion, use Delete Account in Luv Settings. Processing is asynchronous, so wait for the app to confirm completion. If the request is unavailable, delayed, or you cannot access the app, email privacy@luvnote.app." },
   ];
 
   return (
@@ -99,13 +99,13 @@ export function Support() {
                 Contact Us
               </h2>
               <p className="text-sm text-[#928374] text-center mb-12">
-                Reach us directly — we read every message.
+                For faster help, include your iOS version, Luv version, and what you expected to happen.
               </p>
             </AnimatedSection>
             <div className="grid md:grid-cols-2 gap-6">
               <AnimatedSection delay={0.1}>
                 <a
-                  href="mailto:support@luv.app"
+                  href="mailto:support@luvnote.app"
                   className="surface-panel block rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#d3869b]/30 group"
                 >
                   <div className="mb-6 w-fit">
@@ -120,12 +120,12 @@ export function Support() {
                   <p className="text-sm text-[#928374] mb-5 leading-relaxed">
                     General inquiries and account issues
                   </p>
-                  <span className="font-mono text-sm text-[#d3869b]">support@luv.app</span>
+                  <span className="font-mono text-sm text-[#d3869b]">support@luvnote.app</span>
                 </a>
               </AnimatedSection>
               <AnimatedSection delay={0.15}>
                 <a
-                  href="mailto:bug@luv.app"
+                  href="mailto:bug@luvnote.app"
                   className="surface-panel block rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#d3869b]/30 group"
                 >
                   <div className="mb-6 w-fit">
@@ -140,7 +140,7 @@ export function Support() {
                   <p className="text-sm text-[#928374] mb-5 leading-relaxed">
                     Found a technical issue? Let us know
                   </p>
-                  <span className="font-mono text-sm text-[#d3869b]">bug@luv.app</span>
+                  <span className="font-mono text-sm text-[#d3869b]">bug@luvnote.app</span>
                 </a>
               </AnimatedSection>
             </div>
@@ -202,41 +202,11 @@ export function Support() {
           </div>
         </section>
 
-        <div className="cinematic-divider max-w-[600px] mx-auto" />
-
-        {/* System Status */}
-        <section className="px-6 pt-20 pb-24">
-          <div className="max-w-[760px] mx-auto">
-            <AnimatedSection>
-              <div className="widget-depth rounded-2xl px-6 py-5 flex items-center gap-3 mb-8">
-                <div className="w-2.5 h-2.5 bg-[#b8bb26] rounded-full animate-pulse" />
-                <h2 className="text-base font-semibold text-[#fbf1c7] tracking-tight">
-                  All Systems Operational
-                </h2>
-              </div>
-            </AnimatedSection>
-            <div className="space-y-4 px-2">
-              {[
-                { date: "Jan 15", text: "Fixed widget refresh delay on iOS 17.2" },
-                { date: "Jan 12", text: "Improved message delivery speed by 30%" },
-                { date: "Jan 8", text: "Added dark mode customization for widgets" },
-              ].map((update, i) => (
-                <AnimatedSection key={i} delay={0.05 * (i + 1)}>
-                  <div className="flex items-baseline gap-4">
-                    <span className="font-mono text-xs text-[#928374] flex-shrink-0 w-12">{update.date}</span>
-                    <span className="text-sm text-[#a89984]"><span className="text-[#b8bb26] mr-2">✓</span>{update.text}</span>
-                  </div>
-                </AnimatedSection>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Footer */}
-        <section className="px-6 pb-24">
+        <section className="px-6 pt-20 pb-24">
           <div className="max-w-[900px] mx-auto text-center">
             <p className="text-sm text-[#928374]">
-              Still need help? <a href="mailto:support@luv.app" className="text-[#d3869b] hover:underline">support@luv.app</a>
+              Still need help? <a href="mailto:support@luvnote.app" className="text-[#d3869b] hover:underline">support@luvnote.app</a>
             </p>
           </div>
         </section>
